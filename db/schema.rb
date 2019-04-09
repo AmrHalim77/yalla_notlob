@@ -24,6 +24,20 @@ ActiveRecord::Schema.define(version: 2019_04_09_182952) do
     t.datetime "updated_at", null: false
     t.integer "user_id"
     t.index ["user_id"], name: "index_orders_on_user_id", unique: true
+ActiveRecord::Schema.define(version: 2019_04_09_180903) do
+
+  create_table "items", force: :cascade do |t|
+    t.integer "item_id"
+    t.string "item_name"
+    t.integer "amount"
+    t.integer "price"
+    t.text "comment"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "order_id"
+    t.integer "user_id"
+    t.index ["order_id"], name: "index_items_on_order_id", unique: true
+    t.index ["user_id"], name: "index_items_on_user_id", unique: true
   end
 
 end
