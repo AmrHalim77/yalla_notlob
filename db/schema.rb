@@ -10,6 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+ActiveRecord::Schema.define(version: 2019_04_09_182952) do
+
+  create_table "orders", force: :cascade do |t|
+    t.string "order_status"
+    t.string "order_type"
+    t.string "restaurant"
+    t.string "menu_image"
+    t.string "joined_users"
+    t.string "invited_users"
+    t.string "order_items"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id"
+    t.index ["user_id"], name: "index_orders_on_user_id", unique: true
 ActiveRecord::Schema.define(version: 2019_04_09_180903) do
 
   create_table "items", force: :cascade do |t|
