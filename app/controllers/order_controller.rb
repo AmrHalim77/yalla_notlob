@@ -1,13 +1,12 @@
 class OrderController < ApplicationController
   def index
-    @orders = Order.all
+  @orders = Order.all
   end
 
-  def show
-    @orders = Order.all
-  end
+  def show   
+    @order = Order.find(params[:id])   
+  end   
 
-    # GET method for the new order form 
   def new
     @order = Order.new
   end
