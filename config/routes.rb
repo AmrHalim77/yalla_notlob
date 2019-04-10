@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   get 'item/index'
   get 'item/show'
   get 'item/new'
