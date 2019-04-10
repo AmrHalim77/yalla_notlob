@@ -1,0 +1,33 @@
+
+<h1>Item#index</h1>
+<p>Find me in app/views/item/index.html.erb</p>
+
+<h2>Order details</h2>
+
+<h1>Add Order</h1>
+
+<%= form_with scope: :item, url: "/item/create",local: true do |form| %>
+   <label>Order for:</label>
+  <select>
+  <option value="Breakfast">Breakfast</option>
+  <option value="Lunch">Lunch</option>
+  </select> 
+   
+  
+
+    <label>Restaurant:</label>
+    <%= form.text_field :item_name %><br>
+
+    <label>Friends:</label>
+    <%= form.text_field :item_name %><br>
+
+    <%= form.submit "add" %>
+  <% end %>
+
+
+
+
+
+
+
+

@@ -12,13 +12,13 @@ class ItemController < ApplicationController
   end
 
   def create
-    @item = Item.new(item_params)   
+    @item = Item.new(item_params.merge({:order=>current_order}))
     if @item.save   
       flash[:notice] = 'Product added!'  
     else   
         flash[:error] = 'Failed to edit product!'   
         # render :new   
-    end     
+  end     
 
     render plain: params[:item].inspect
 
