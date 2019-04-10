@@ -1,2 +1,46 @@
 <h1>Item#index</h1>
 <p>Find me in app/views/item/index.html.erb</p>
+
+
+<h2>Order details</h2>
+
+<table>
+    <tr>
+      <th>Person<th>
+      <th>Item</th>
+      <th>Amount</th>
+      <th>Price</th>
+      <th>Comment</th>
+    </tr>   
+
+    <% @items.each do |item| %>
+      <tr>
+          <td><%= item.user_id %></td>
+          <td><%= item.item_name %></td>
+          <td><%= item.amount %></td>
+          <td><%= item.price %></td>
+          <td><%= item.comment %></td>
+      </tr>
+    <% end %>
+
+</table>
+
+<%= form_with scope: :item, url: "/item/create",local: true do |form| %>
+
+    <label>item name:</label>
+    <%= form.text_field :item_name %><br>
+
+    <label>amount:</label>
+    <%= form.number_field( 'amount', in: 1..20, step: 1) %><br>
+
+    <label>price:</label>
+    <%= form.number_field( 'price' , in: 1..200, step: 1) %><br>
+
+    <label>comment:</label>
+    <%= form.text_area :comment, size: "20x5" %><br><br>
+    <%= form.submit "add" %>
+  <% end %>
+
+
+
+

@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   get 'item/index'
   get 'item/show'
   get 'item/new'
-  get 'item/create'
+  post 'item/create'
   get 'item/edit'
   get 'item/update'
   get 'item/destroy'
