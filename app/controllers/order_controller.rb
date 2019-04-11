@@ -54,10 +54,10 @@ class OrderController < ApplicationController
     @order = Order.find(params[:id])
     if @order.delete
       flash[:notice] = "order cancelled!"
-      render :new
+      redirect_to action: "index"
     else
       flash[:error] = "couldn't cancel order!"
-      render :new
+      redirect_to action: "index"
     end
   end
 
