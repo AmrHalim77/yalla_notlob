@@ -23,7 +23,7 @@
           <td><%= order.order_status %></td>
           <td>
 
-          <%= link_to('view',{:action => 'index', :controller=> 'Item',:id => order.id}) %>
+          <%= link_to('view',{:action => 'toitem', :id => order.id}) %>
           <a href="/order/update">finish</a>
           <a href="/order/destroy">cancel</a>
           </td>

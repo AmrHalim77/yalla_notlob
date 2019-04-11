@@ -1,54 +1,11 @@
 class OrderController < ApplicationController
   def index
-<<<<<<< HEAD
-    @orders = Order.all
-  end
-
-  def show
-    @order = Order.find(params[:id])  
-  end
-
-  def new
-    @order = Order.new  
-  end
-
-  def create
-    @order = Order.new(order_params.merge({:user=>current_user}))   
-    if @order.save   
-      flash[:notice] = 'order added!'   
-      redirect_to root_path   
-    else   
-      flash[:error] = 'Failed to edit product!'   
-      # render :new   
-    end   
-    render plain: params[:item].inspect
-  end
-
-  def edit
-  end
-
-  def update
-  end
-
-  def destroy
-    @order = Order.find(params[:id])   
-    if @order.delete   
-      flash[:notice] = 'Product deleted!'   
-      # redirect_to root_path   
-    else   
-      flash[:error] = 'Failed to delete this product!'   
-      render :destroy   
-    end   
-  end
-
-end
-
-
-def order_params   
-  params.require(:product).permit(:name, :price, :old_price, :short_description, :full_description)   
-end   
-=======
   @orders = Order.all
+  end
+
+  def toitem
+    # redirect_to :controller => 'items', :action => 'index'
+    redirect_to '/item/index' 
   end
 
   def show   
@@ -71,8 +28,6 @@ end
     end   
 
     # render plain: params[:order].inspect
-
-
   end
 
   # GET method for editing a Order based on id
@@ -109,4 +64,3 @@ end
     params.require(:order).permit( :order_type, :restaurant, :invited_users, :menu_image)   
     end 
 end
->>>>>>> e9fd429968ff902f0e14d5ee1b1620b7d377c6b2
