@@ -15,13 +15,14 @@ class OrderController < ApplicationController
 
     @order = Order.new(order_params.merge({:user=>current_user , :order_status=>"waiting"}))   
     if @order.save   
-      flash[:notice] = 'Order added!' 
+      # flash[:notice] = 'Order added!' 
+      redirect_to action: "index"
     else   
-        flash[:error] = 'Failed to edit Order!'   
-        # render :new   
-    end     
+      flash[:error] = 'Failed to edit Order!'   
+      redirect_to "/order/index" 
+    end   
 
-    render plain: params[:order].inspect
+    # render plain: params[:order].inspect
 
 
   end
@@ -57,6 +58,6 @@ class OrderController < ApplicationController
 
 
   def order_params   
-    params.require(:order).permit(:order_type, :restaurant, :invited_users, :menu_image)   
+    params.require(:order).permit( :order_type, :restaurant, :invited_users, :menu_image)   
     end 
 end

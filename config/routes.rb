@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   get 'user/index'
   devise_for :users, path: 'auth', path_names: { sign_in: 'login', sign_out: 'logout', password: 'secret', confirmation: 'verification', unlock: 'unblock', registration: 'register', sign_up: 'cmon_let_me_in' }
   root to: 'user#index'
-  get 'item/index'
+  get 'items/index', to: 'items#index'
   get 'item/show'
   get 'item/new'
   post 'item/create'

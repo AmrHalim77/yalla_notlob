@@ -3,7 +3,8 @@
 
 
 <h2>Orders</h2>
-<a href="/item/new">add order</a>
+<a href="/order/new">add order</a>
+
 <table>
     <tr>
       <th>Order<th>
@@ -21,7 +22,8 @@
           <td><%= order.invited_users %></td>
           <td><%= order.order_status %></td>
           <td>
-          <a href="/item/index">view</a>
+
+          <%= link_to('view',{:action => 'index', :controller=> 'Item',:id => order.id}) %>
           <a href="/order/update">finish</a>
           <a href="/order/destroy">cancel</a>
           </td>
