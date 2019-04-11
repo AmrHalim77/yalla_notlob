@@ -12,7 +12,7 @@ class ItemController < ApplicationController
   end
 
   def create
-    @item = Item.new(item_params)   
+    @item = Item.new(item_params.merge({:user=>current_user}))   
     if @item.save   
       flash[:notice] = 'Product added!'  
     else   
