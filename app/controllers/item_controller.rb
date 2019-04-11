@@ -1,6 +1,6 @@
 class ItemController < ApplicationController
-  def index  
-    @items = Item.all
+  def index 
+    
   end
 
   def show
@@ -20,7 +20,7 @@ class ItemController < ApplicationController
         # render :new   
   end     
 
-    render plain: params[:item].inspect
+    #render plain: params[:item].inspect
 
     # @item = Item.new(item_params)   
     # if @item.save   
