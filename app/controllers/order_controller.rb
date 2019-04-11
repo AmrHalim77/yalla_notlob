@@ -3,6 +3,11 @@ class OrderController < ApplicationController
   @orders = Order.all
   end
 
+  def toitem
+    @order = Order.find(params[:id])
+    redirect_to :controller => 'item' , :action => 'index' , :id => params[:id]
+  end
+
   def show   
     @order = Order.find(params[:id])   
   end   
