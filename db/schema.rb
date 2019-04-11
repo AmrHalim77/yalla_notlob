@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_10_185629) do
+ActiveRecord::Schema.define(version: 2019_04_11_143553) do
 
   create_table "items", force: :cascade do |t|
     t.integer "item_id"
@@ -20,10 +20,10 @@ ActiveRecord::Schema.define(version: 2019_04_10_185629) do
     t.text "comment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "order_id"
     t.integer "user_id"
-    t.index ["order_id"], name: "index_items_on_order_id", unique: true
-    t.index ["user_id"], name: "index_items_on_user_id", unique: true
+    t.integer "order_id"
+    t.index ["order_id"], name: "index_items_on_order_id"
+    t.index ["user_id"], name: "index_items_on_user_id"
   end
 
   create_table "orders", force: :cascade do |t|
