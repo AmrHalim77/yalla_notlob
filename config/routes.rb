@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   post 'order/create'
   get 'order/edit'
   get 'order/toitem'
-  post 'order/update'
+  post 'order/update' 
   get 'order/destroy'
   get 'user/index'
   devise_for :users, path: 'auth', path_names: { sign_in: 'login', sign_out: 'logout', password: 'secret', confirmation: 'verification', unlock: 'unblock', registration: 'register', sign_up: 'cmon_let_me_in' }
@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   get 'item/new'
   post 'item/create'
   get 'item/edit'
-  get 'item/update'
+  get 'item/update' 
   get 'item/destroy'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
