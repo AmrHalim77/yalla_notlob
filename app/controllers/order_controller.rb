@@ -4,8 +4,8 @@ class OrderController < ApplicationController
   end
 
   def toitem
-    # redirect_to :controller => 'items', :action => 'index'
-    redirect_to '/item/index' 
+    @order = Order.find(params[:id])
+    redirect_to :controller => 'item' , :action => 'index' , :id => params[:id]
   end
 
   def show   
