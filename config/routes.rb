@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   get 'order/new'
   post 'order/create'
   get 'order/edit'
+  get 'order/toitem'
   post 'order/update'
   get 'order/destroy'
   get 'user/index'

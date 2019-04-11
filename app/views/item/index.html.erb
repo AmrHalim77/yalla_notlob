@@ -26,8 +26,9 @@
 </table>
 <% @id = params[:id]%>
 
-<%= form_with scope: :item, url: "/item/create/:id",local: true do |form| %>
+<%= form_with scope: :item, :url => { :action => "create", :id_order =>params[:id]},local: true do |form| %>
 
+  
     <label>item name:</label>
     <%= form.text_field :item_name %><br>
 

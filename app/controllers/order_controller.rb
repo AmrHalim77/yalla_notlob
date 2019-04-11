@@ -32,8 +32,6 @@ class OrderController < ApplicationController
     end   
 
     # render plain: params[:order].inspect
-
-
   end
 
   # GET method for editing a Order based on id
