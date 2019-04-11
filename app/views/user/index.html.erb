@@ -7,5 +7,15 @@
   <%= link_to('Login', new_user_session_path)  %>  
   </li>
 <% end %>
+
 <h1>User#index</h1>
+
+
+<% @users.each do |item| %>
+  <tr>
+      <td><%= item.email %></td>
+      
+  </tr>
+<% end %>
+
 <p>Find me in app/views/user/index.html.erb</p>

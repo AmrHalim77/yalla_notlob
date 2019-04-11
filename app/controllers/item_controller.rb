@@ -1,6 +1,7 @@
 class ItemController < ApplicationController
   def index 
-    @items = Item.all
+    @items = Item.where(:order_id => params[:id])
+    @orders = Order.find(params[:id])
   end
 
   def show
@@ -16,7 +17,7 @@ class ItemController < ApplicationController
     @item = Item.new(item_params.merge({:order_id=>params[:id_order].to_i}))
     if @item.save   
       flash[:notice] = 'Product added!'  
-      redirect_to @item
+      redirect_to :action => 'index' , :id => params[:id_order].to_i
     else   
         flash[:error] = 'Failed to edit product!'   
         # render :new   

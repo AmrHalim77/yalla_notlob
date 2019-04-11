@@ -8,11 +8,6 @@
 
 <%= form_with scope: :order, url: "/order/create",local: true do |form| %>
    <label>Order for:</label>
-<<<<<<< HEAD
-  
-  f.select(:order_type, Person::ORDER_TYPES)
-=======
->>>>>>> e9fd429968ff902f0e14d5ee1b1620b7d377c6b2
   
   <%= form.select(:order_type, options_for_select([['breakfast','breakfast'],['lunch','lunch']]) ) %>
 
@@ -21,6 +16,9 @@
 
     <label>Friends:</label>
     <%= form.text_field :invited_users %><br>
+
+    <%= form.label :menu_image %>
+    <%= form.file_field :menu_image %>
 
     <%= form.submit "submit" %>
   <% end %>

@@ -47,6 +47,8 @@ GEM
     archive-zip (0.12.0)
       io-like (~> 0.3.0)
     arel (9.0.0)
+    attach (1.0.5)
+      records_manipulator (>= 1.0, < 2.0)
     bcrypt (3.1.12)
     bindex (0.7.0)
     bootsnap (1.4.3)
@@ -147,6 +149,7 @@ GEM
     rb-fsevent (0.10.3)
     rb-inotify (0.10.0)
       ffi (~> 1.0)
+    records_manipulator (1.0.1)
     regexp_parser (1.4.0)
     responders (2.4.1)
       actionpack (>= 4.2.0, < 6.0)
@@ -207,6 +210,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  attach (~> 1.0.1)
   bootsnap (>= 1.1.0)
   byebug
   capybara (>= 2.15)
