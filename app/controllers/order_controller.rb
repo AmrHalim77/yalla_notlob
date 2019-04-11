@@ -67,6 +67,6 @@ class OrderController < ApplicationController
 
 
   def order_params   
-    params.require(:order).permit( :order_type, :restaurant, :invited_users, :)   
+    params.require(:order).permit( :order_type, :restaurant, :invited_users, :menu)   
     end 
 end

@@ -3,6 +3,11 @@
 
 <h2>Order details</h2>
 
+<% if @order.menu.attached? %>
+  <image src="<%=(url_for(@order.menu))%>">
+<% end %>
+
+
 <table>
     <tr>
       <th>Person<th>
@@ -23,9 +28,6 @@
     <% end %>
 
 </table>
-
-<% order = Order.find(params[:id]) %>
-<% order.menu_image %>
 
 <%= form_with scope: :item, :url => { :action => "create", :id_order =>params[:id]},local: true do |form| %>
     <label>item name:</label>
