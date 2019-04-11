@@ -12,7 +12,8 @@ class ItemController < ApplicationController
   end
 
   def create
-    @item = Item.new(item_params.merge({:order=>current_order}))
+    p params[:id_order].to_i
+    @item = Item.new(item_params.merge({:order_id=>params[:id_order].to_i}))
     if @item.save   
       flash[:notice] = 'Product added!'  
     else   
@@ -42,7 +43,7 @@ class ItemController < ApplicationController
   end
 
   def item_params   
-    params.require(:item).permit(:item_name, :amount, :price, :comment)   
+    params.require(:item).permit(:item_name, :amount, :price, :comment, :order_id)   
   end   
 
 end
