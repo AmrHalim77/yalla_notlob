@@ -1,2 +1,29 @@
-<h1>Order#new</h1>
-<p>Find me in app/views/order/new.html.erb</p>
+
+<h1>Item#index</h1>
+<p>Find me in app/views/item/index.html.erb</p>
+
+<h2>Order details</h2>
+
+<h1>Add Order</h1>
+
+<%= form_with scope: :order, url: "/order/create",local: true do |form| %>
+   <label>Order for:</label>
+  
+  <%= form.select(:order_type, options_for_select([['breakfast','breakfast'],['lunch','lunch']]) ) %>
+
+    <label>Restaurant:</label>
+    <%= form.text_field :restaurant %><br>
+
+    <label>Friends:</label>
+    <%= form.text_field :invited_users %><br>
+
+    <%= form.submit "submit" %>
+  <% end %>
+
+
+
+
+
+
+
+

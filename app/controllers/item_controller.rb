@@ -1,5 +1,5 @@
 class ItemController < ApplicationController
-  def index  
+  def index 
     @items = Item.all
   end
 
@@ -12,15 +12,15 @@ class ItemController < ApplicationController
   end
 
   def create
-    @item = Item.new(item_params.merge({:user=>current_user}))   
+    @item = Item.new(item_params.merge({:order=>current_order}))
     if @item.save   
       flash[:notice] = 'Product added!'  
     else   
         flash[:error] = 'Failed to edit product!'   
         # render :new   
-    end     
+  end     
 
-    render plain: params[:item].inspect
+    #render plain: params[:item].inspect
 
     # @item = Item.new(item_params)   
     # if @item.save   
