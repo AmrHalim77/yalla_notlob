@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  resources :groups
+  # get 'groups/index'
+  # get 'groups/show'
+  # get 'groups/new'
+  # get 'groups/edit'
+  # get 'groups/destroy'
   get 'order/index'
   get 'order/toitem'
   get 'order/show'
