@@ -15,6 +15,9 @@
 
     <label>Friends:</label>
     <%= form.text_field :invited_users %><br>
+ 
+    <%= form.label "menu_image" %>
+    <%= form.file_field :menu %>
 
     <%= form.submit "submit" %>
   <% end %>
