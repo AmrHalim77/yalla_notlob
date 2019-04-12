@@ -1,4 +1,6 @@
 class GroupsController < ApplicationController
+      before_action :set_group, only: [:show, :edit, :update, :destroy]
+
   def index
     @groups=Group.all
   end
@@ -7,13 +9,14 @@ class GroupsController < ApplicationController
   end
 
   def new
-    @groups=Group.new
+    @group=Group.new
   end
 
   def edit
   end
 
   def destroy
+    @group.destroy
   end
 
   def create
@@ -21,14 +24,23 @@ class GroupsController < ApplicationController
 
     respond_to do |format|
       if @group.save
-        format.html {redirect_to @group, notice: 'Group was successfully created'}
-        format.json {render :show, status: :created, location:@group}
+        format.html { redirect_to @group, notice: 'Group was successfully created' } 
+        format.json { render :show, status: :created, location:@group }
       else 
-        format.html {render :new}
-        format.json {render json:  @group.errors, status: :unprocessable_entity}  
+        format.html { render :new}
+        format.json { render json:  @group.errors, status: :unprocessable_entity }  
       end     
     end
   end
+  private 
+
+  def set_group
+    @group = Group.find(params[:id])
+  end
+  
+  def group_params
+    params.require(:group).permit(:name, :user_id)
+  end  
 
 end
 

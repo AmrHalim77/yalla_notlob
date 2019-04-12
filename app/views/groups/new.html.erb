@@ -1,10 +1,14 @@
 <h1>Add new Group</h1>
 
-<%= form_for(@groups) do |f| %>
+<%= form_for(@group) do |f| %>
 
 <div class="field">
 <%= f.label :Group_Name %>
 <%= f.text_field :name %>
+</div>
+<div class="field">
+<%= f.label :User_ID %>
+<%= f.number_field :user_id %>
 </div>
 <div class="actions">
 <%= f.submit %>
