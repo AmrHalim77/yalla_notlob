@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   post 'user/addfriend'
   root to: 'user#index'
   get 'item/index'
-   get 'item/show'
+  get 'item/show'
   get 'item/new'
   post 'item/create'
   get 'item/edit'

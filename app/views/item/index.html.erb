@@ -1,8 +1,12 @@
 <h1>Item#index</h1>
 <p>Find me in app/views/item/index.html.erb</p>
 
-
 <h2>Order details</h2>
+
+<% if @order.menu.attached? %>
+  <image src="<%=(url_for(@order.menu))%>">
+<% end %>
+
 
 <table>
     <tr>
@@ -26,8 +30,6 @@
 </table>
 
 <%= form_with scope: :item, :url => { :action => "create", :id_order =>params[:id]},local: true do |form| %>
-
-  
     <label>item name:</label>
     <%= form.text_field :item_name %><br>
 
@@ -41,7 +43,3 @@
     <%= form.text_area :comment, size: "20x5" %><br><br>
     <%= form.submit "add" %>
   <% end %>
-
-
-
-
