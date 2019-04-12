@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+
+  devise_for :users, path: 'auth', path_names: { sign_in: 'login', sign_out: 'logout', password: 'secret', confirmation: 'verification', unlock: 'unblock', registration: 'register', sign_up: 'cmon_let_me_in' }
   get 'order/index'
   get 'order/toitem'
   get 'order/show'
@@ -9,7 +11,8 @@ Rails.application.routes.draw do
   post 'order/update' 
   get 'order/destroy'
   get 'user/index'
-  devise_for :users, path: 'auth', path_names: { sign_in: 'login', sign_out: 'logout', password: 'secret', confirmation: 'verification', unlock: 'unblock', registration: 'register', sign_up: 'cmon_let_me_in' }
+  get 'user/friend'
+  post 'user/addfriend'
   root to: 'user#index'
   get 'item/index'
    get 'item/show'
