@@ -1,0 +1,25 @@
+<div id="search">
+<%= form_tag('/friendships' , method: "get") do %>
+  <%= label_tag(:search, "Search for:") %>
+<%= text_field_tag :search, params[:search], placeholder: "Search Users",list:"usersEmails" %>
+  <datalist id="usersEmails">
+  <label> or select one from the list:
+  <%= select_tag :search,params[:search] %>
+    <% @users.each do |useremail| %>
+      <option value= "<%= useremail.email %>" ></option> 
+    <% end %>
+    </select>
+   </label>
+  </datalist>
+  <%= submit_tag("Search") %>
+<% end %>
+</div>
+
+<div id="searchResult">
+   <h3>Search Result</h3>
+  <% if @usersearch != nil%>
+    <% @usersearch.each do |user|%>
+      <h2> <%= user.email %></h2>
+    <%end%>
+  <% end%>
+</div>

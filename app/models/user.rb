@@ -8,4 +8,7 @@ class User < ApplicationRecord
   serialize :friends
   # serialize :groups
   # serialize :orders
+  def self.search(search)
+		where("users.email LIKE ?", "%#{search}%")
+	end
 end

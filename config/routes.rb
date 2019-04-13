@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :friendships
+  post '/friendships/create', to: 'friendships#create'
+  post '/friendships/destroy', to: 'friendships#destroy'
   get 'order/index'
   get 'order/toitem'
   get 'order/show'
