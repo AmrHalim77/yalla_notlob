@@ -2,7 +2,7 @@ class GroupsController < ApplicationController
       before_action :set_group, only: [:show, :edit, :update, :destroy]
 
   def index
-    @groups=Group.all
+    @groups=Group.where(:user_id => current_user.id)
   end
 
   def show
