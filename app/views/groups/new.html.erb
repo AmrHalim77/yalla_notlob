@@ -1,0 +1,17 @@
+<h1>Add new Group</h1>
+
+<%= form_for(@group) do |f| %>
+
+<div class="field">
+<%= f.label :Group_Name %>
+<%= f.text_field :name %>
+</div>
+<div class="actions">
+<%= f.submit %>
+</div>
+
+
+ <% end %>   
+
+
+<%= link_to 'Back', groups_path %>
