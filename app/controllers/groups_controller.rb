@@ -21,7 +21,7 @@ class GroupsController < ApplicationController
 
   def create
   @group = Group.new(group_params)
-
+    @group.user_id = current_user.id
     respond_to do |format|
       if @group.save
         format.html { redirect_to @group, notice: 'Group was successfully created' } 
@@ -39,7 +39,8 @@ class GroupsController < ApplicationController
   end
   
   def group_params
-    params.require(:group).permit(:name, :user_id)
+    
+    params.require(:group).permit(:name)
   end  
 
 end
