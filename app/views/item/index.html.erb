@@ -11,6 +11,7 @@
       <th>Amount</th>
       <th>Price</th>
       <th>Comment</th>
+      <th>Options</th>
     </tr>   
 
     <% @items.each do |item| %>
@@ -20,8 +21,21 @@
           <td><%= item.amount %></td>
           <td><%= item.price %></td>
           <td><%= item.comment %></td>
-      </tr>
-    <% end %>
+          <td>          
+           
+            <%= link_to 'Cancel',
+            {controller: 'item',
+             action: 'destroy',
+             id_order: params[:id],
+             id: item.id},
+            class: 'button' %>  
+
+          </td>
+        </tr>
+      <% end %> 
+         
+      
+    
 
 </table>
 
