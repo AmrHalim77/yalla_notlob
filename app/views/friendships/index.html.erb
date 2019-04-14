@@ -1,8 +1,10 @@
-<div id="search">
-<%= form_tag('/friendships' , method: "get") do %>
-  <%= label_tag(:search, "Search for:") %>
+<div class="container">
+<div class="about-info">
+<div class="w3-agileits-subscribe-form">
+<%= form_tag(friendships_path, :method => "get", id: "search-form") do %>
 <%= text_field_tag :search, params[:search], placeholder: "Search Users",list:"usersEmails" %>
   <datalist id="usersEmails">
+
   <label> or select one from the list:
   <%= select_tag :search,params[:search] %>
     <% @users.each do |useremail| %>
@@ -10,16 +12,137 @@
     <% end %>
     </select>
    </label>
+
   </datalist>
-  <%= submit_tag("Search") %>
+  <%= submit_tag "Search" ,:onclick => "return validateform()" %>
 <% end %>
 </div>
-
-<div id="searchResult">
-   <h3>Search Result</h3>
-  <% if @usersearch != nil%>
-    <% @usersearch.each do |user|%>
-      <h2> <%= user.email %></h2>
-    <%end%>
-  <% end%>
 </div>
+<br>
+<div class="inner_w3l_agile_grids col-md-12" id="friendList">
+  <div class="col-md-12" >
+  <div class="agileinfo-heading" style="padding-bottom: 10px">
+    <h4>Freinds list</h4>
+  </div>
+</div>
+  <% @friendships.each do |friendship| %>
+    <% if friendship.user_id == current_user.id %>
+      <div class='col-md-3' style='padding-bottom: 10px; padding-top: 10px'>
+        <div class='col-sm-4' style='width:70px;'>
+        
+        </div>
+        <div class='col-sm-8'" style='padding-left: 30px'>
+            <h4><%= friendship.friend.email %></h4>
+            <td><a id="<%= friendship.friend_id %>" class="rmFriend", onclick="del(this)", data=<%= friendship.friend_id  %>>Destroy</a></td>
+            <%= link_to 'Unfreind', friendship, method: :delete, data: { confirm: 'Are you sure?' } %>
+            
+        </div>
+      </div>
+      <% end %>
+  <% end %>
+</div>
+<%if @usersearch != nil %>
+  <div class="col-md-12" >
+  <div class="agileinfo-heading" style="padding-bottom: 10px">
+    <h4>Search List</h4>
+  </div>
+</div>
+   <% @usersearch.each do |user| %>
+   <% if Friendship.where(user_id:current_user.id,friend_id:user.id).present? %>
+
+   <p><a><%=user.email%></a>Yor Are Already Friends</p>
+   <% else %>
+   <% if  user.id == current_user.id %>
+   <div  class="text-center" style="padding-top: 10px">
+      <p class="mb-0">You can't search for yourself</a>.</p>
+    </div>
+   </div>
+    <%else %>
+   <div class="col-md-7" style="width:100px;">
+        </div>
+   <div class="col-md-3">
+    <table class="table table-hover">
+      <tbody>
+          <tr class="table-active">
+            <td><b>Email:</b></td>
+              <td><b> <%=h user.email %></b></td>
+          </tr>
+          <tr class="table-active">
+            <td>Add Freind</td>
+            <td><a class="addFriend", data="<%= user.id %>">Add Friend</a></td>
+          </tr>
+    </tbody>
+  </table>
+</div>
+<% end %>
+    <% end %>
+    <% end %>
+<% end %>
+
+<table class="table table-hover">
+      <!-- end -->
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Friend</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @friendships.each do |friendship| %>
+      <tr>
+        <td> <%= friendship.user.name %> </td>
+        <td> <%= friendship.friend.name %> </td>
+        <td><%= link_to 'Destroy', friendship, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+<!--  
+<%= link_to 'New Friendship', new_friendship_path %>-->
+</div>
+
+<script type="text/javascript">
+    $(".addFriend").click(function(e){
+      e.preventDefault();
+      fid = $(this).attr("data");
+      row = $(this).parents("tbody")
+      $.ajax({
+        url:"/friendships/create",
+        method:"post",
+        data:{friend_id:fid},
+        success:function(res){
+          if(!res.error)
+          {
+            row.html("");
+            txt = "<div class='col-md-3' style='padding-bottom: 10px; padding-top: 10px'><div class='col-sm-4' style='width:70px;'></div><div class='col-sm-8' style='padding-left: 30px'><h4>"+res.user.name+"</h4><td><a id='"+res.user.id+"' class='rmFriend', onclick='del(this)', data='"+res.user.id+"'>Destroy</a></td></div>"
+            $("#friendList").append(txt);
+          }
+
+        }
+      });
+    })
+  function del(e){
+
+
+      token = $('meta[name="csrf-token"]').attr('content');
+      fid = $(e).attr("data");
+      console.log(fid)
+      row = $(e).parents("tbody")
+      $.ajax({
+        method:"delete",
+        url:"/friendships/"+fid,
+        data:{authenticity_token:token,id:fid },
+        success:function(res){
+          
+            row.html("");
+            $("#"+fid).parent().parent().remove();
+        }
+      });
+    }
+    
+    
+</script>
