@@ -1,5 +1,7 @@
 class FriendshipsController < ApplicationController
-    before_action :authenticate_user!
+  skip_before_action :verify_authenticity_token
+  before_action :authenticate_user!
+
     def index
       @users = User.select("email")
       @friendships = Friendship.where(user_id: current_user.id)
@@ -10,23 +12,22 @@ class FriendshipsController < ApplicationController
       end
     end
     def create
-      p params[:friend_id]
       @friendship = current_user.friendships.build(:friend_id => params[:friend_id])
       if @friendship.save
           
-        #render json: {error:false, msg:"friendship created", user: User.find(params[:friend_id])}
+        render json: {error:false, msg:"friendship created", user: User.find(params[:friend_id])}
       else
 
-        #render json: {error:true, msg:"friendship not created"}
+        render json: {error:true, msg:"friendship not created"}
       end
     end
     
     def destroy
       @friendship = Friendship.where(user_id: current_user.id, friend_id:params[:id]).first
       if @friendship.destroy
-          # render json: {error:false, msg:"friendship destroied"}
+          render json: {error:false, msg:"friendship destroied"}
       else
-          #render json: {error:true, msg:"friendship not destroiy"}
+          render json: {error:true, msg:"friendship not destroiy"}
       end
     end
     def find
