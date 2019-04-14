@@ -19,7 +19,17 @@
    <h3>Search Result</h3>
   <% if @usersearch != nil%>
     <% @usersearch.each do |user|%>
-      <h2> <%= user.email %></h2>
+      <b> <%= user.email %></b>
+     <%= link_to 'Add Friend',friendships_path(),:friend_id => user.id,method: :post %>
     <%end%>
   <% end%>
+</div>
+
+<div id="myFriends">
+ <% if @friendships != nil %>
+   <h3>My Friends</h3>
+     <% @friendships.each do |user|%>
+        <h2> <%= user.email %></h2>
+     <%end%>
+   <% end %>
 </div>
