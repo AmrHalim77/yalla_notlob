@@ -1,6 +1,17 @@
 welcome new friend 
 
+<table>
+<tr>
+<td>My Group Members</td>
+</tr>
+<% @groupmembers.each do |member| %>
+<tr>
+<td><%=member.user_email %><td>
+<td><%= link_to "delete", "/groups/#{params[:id]}/deletemember/?default_id=#{member.id}"%> </td>
+</tr>
 
+<% end %>
+</table>    
 
 <%= form_with scope: :group, :url => { :action => "addmember", :group_id =>params[:id]},local: true do |form| %>
     <label>member email:</label>

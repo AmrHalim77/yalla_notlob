@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_16_110220) do
+ActiveRecord::Schema.define(version: 2019_04_16_123925) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -50,8 +50,8 @@ ActiveRecord::Schema.define(version: 2019_04_16_110220) do
 
   create_table "groupmembers", force: :cascade do |t|
     t.integer "group_id"
-    t.integer "member_id"
     t.integer "user_id"
+    t.string "user_email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["group_id"], name: "index_groupmembers_on_group_id"

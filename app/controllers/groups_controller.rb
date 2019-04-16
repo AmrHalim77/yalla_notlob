@@ -6,26 +6,35 @@ class GroupsController < ApplicationController
   end
   def addmember
     @a = params[:group]
-    @member = User.where(:email => @a["email"])
+    @member = User.where(:email => @a["email"]) 
     
     @friendship = Friendship.where("friend_id = #{@member.ids[0]} AND user_id = #{current_user.id}")
-    if @friendship.present?
-      @add_member = Groupmember.new(group_params)
-      @add_member.user_id = @member.ids[0]
-      @add_member.save()
-    end
+    @add_member = Groupmember.new
+    @add_member.user_id = @member.ids[0]
+    @add_member.group_id = params[:group_id]
+    @add_member.user_email = @a["email"]
+    @add_member.save
 
 
-    p "******************************************************"
-    p @a["email"]
-    p params[:group_id]
-    p "Erooooooooooooooooooor AMrrrrrrrrrrrrrrrrrrrrrrrrr"
-    p "******************************************************"
-    @asd = params[:email]
+     @asd = params[:email]
+
+    redirect_to "/groups/#{params[:group_id]}"
+    # redirect_to(:action => 'show' , {:group_id => params[:group_id]})
   end
   def show
+    p "******************************************************"
+    p params
+    p "Erooooooooooooooooooor AMrrrrrrrrrrrrrrrrrrrrrrrrr"
+    p "******************************************************"
    
+   @groupmembers = Groupmember.where(:group_id => params[:id])
 
+  end
+  def deletemember
+    @groupmember = Groupmember.find(params[:default_id])
+    @groupmember.destroy
+
+    redirect_to "/groups/#{params[:id]}"
   end
 
   def new
@@ -47,7 +56,6 @@ class GroupsController < ApplicationController
     end
     @group.save
     
-
     end
   def create
   @group = Group.new(group_params)
