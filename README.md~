@@ -1,0 +1,44 @@
+# README
+
+This README would normally document whatever steps are necessary to get the
+application up and running.
+
+Things you may want to cover:
+
+* Ruby version
+
+* System dependencies
+
+* Configuration
+
+* Database creation
+
+* Database initialization
+
+* How to run the test suite
+
+* Services (job queues, cache servers, search engines, etc.)
+
+* Deployment instructions
+
+* ...
+
+class Groupmembers < ApplicationRecord
+    belongs_to :user, foreign_key => "member_id"
+    belongs_to :group, foreign_key => "group_id"
+    validates_uniqueness_of :group_id, :scope => :member_id
+  end
+  
+  
+  
+  class CreateGroupMember < ActiveRecord::Migration[5.2]
+    def change
+      create_table :items do |t|
+        t.integer :member_id
+        t.integer :group_id
+        
+      end
+    end
+  end
+  
+  

@@ -1,2 +1,12 @@
-<h1>Groups#show</h1>
-<p>Find me in app/views/groups/show.html.erb</p>
+welcome new friend 
+
+
+
+<%= form_with scope: :group, :url => { :action => "addmember", :group_id =>params[:id]},local: true do |form| %>
+    <label>member email:</label>
+    <%= params[:id] %>
+    <%= form.text_field :email %><br>
+    <%= form.submit "add" %>
+  <% end %>
+
+  
