@@ -1,5 +1,24 @@
 class UserController < ApplicationController
-    before_action :authenticate_user!
+  before_action :authenticate_user!
   def index
+    @users = User.all
   end
+
+  def friend
+    
+  end
+
+  def addfriend
+    p params[:user][:friend]
+    @user = User.find_by(:email=>params[:user][:friend])
+    p @user
+
+  end
+
+  def login
+  end
+
+
+
+
 end

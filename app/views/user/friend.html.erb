@@ -1,0 +1,5 @@
+<%= form_with scope: :user, :url=>{:action=>'addfriend', method: :post}  ,local: true do |form| %>
+    <label>type an email to befriend sb!:</label> <br>
+    <%= form.email_field :friend, autofocus: true, autocomplete: "email" %><br>
+    <%= form.submit "add!" %>
+    <% end %>

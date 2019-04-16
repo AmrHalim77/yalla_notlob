@@ -1,6 +1,10 @@
 class OrderController < ApplicationController
+  def ind
+    redirect_to items_index_path
+  end
+  
   def index
-  @orders = Order.all
+  @orders = Order.where(:user_id => current_user.id)
   end
 
   def toitem
@@ -39,11 +43,13 @@ class OrderController < ApplicationController
 
   def update
     @order = Order.find(params[:id])
-    if @order.update_attributes(:order_status, "finished" )
+    if @order.update_attribute(:order_status, "finished" )
       flash[:notice]="Order is finished!"
+      redirect_to action: "index"
+
     else
       flash[:error]= "couldn't finish order!"
-      render :new
+      redirect_to action: "index"
     end
   end
 
@@ -52,15 +58,15 @@ class OrderController < ApplicationController
     @order = Order.find(params[:id])
     if @order.delete
       flash[:notice] = "order cancelled!"
-      render :new
+      redirect_to action: "index"
     else
       flash[:error] = "couldn't cancel order!"
-      render :new
+      redirect_to action: "index"
     end
   end
 
 
   def order_params   
-    params.require(:order).permit( :order_type, :restaurant, :invited_users, :menu_image)   
+    params.require(:order).permit( :order_type, :restaurant, :invited_users, :menu)   
     end 
 end

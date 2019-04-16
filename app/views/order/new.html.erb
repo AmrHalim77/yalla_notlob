@@ -1,4 +1,3 @@
-
 <h1>Item#index</h1>
 <p>Find me in app/views/item/index.html.erb</p>
 
@@ -16,6 +15,12 @@
 
     <label>Friends:</label>
     <%= form.text_field :invited_users %><br>
+ 
+    <%= form.label "menu_image" %>
+    <%= form.file_field :menu %>
+
+    <label>Group:</label>
+    <%= form.text_field :invited_groups %><br>
 
     <%= form.submit "submit" %>
   <% end %>

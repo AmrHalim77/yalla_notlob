@@ -1,7 +1,7 @@
 class ItemController < ApplicationController
   def index 
     @items = Item.where(:order_id => params[:id])
-    # @orders = Order.find(params[:id])
+    @order = Order.find(params[:id])
   end
 
   def show
@@ -17,6 +17,7 @@ class ItemController < ApplicationController
     @item = Item.new(item_params.merge({:order_id=>params[:id_order].to_i}))
     if @item.save   
       flash[:notice] = 'Product added!'  
+      redirect_to :action => 'index' , :id => params[:id_order].to_i
     else   
         flash[:error] = 'Failed to edit product!'   
         # render :new   
@@ -58,4 +59,4 @@ class ItemController < ApplicationController
     params.require(:item).permit(:item_name, :amount, :price, :comment, :order_id)   
   end   
 
-end
+end 
