@@ -11,7 +11,13 @@ gem 'sqlite3'
 gem 'attach', '~> 1.0.1'
 #devise
 gem 'devise' 
+#Jquery
+# gem 'jquery-rails' 
 # Use Puma as the app server
+#add for devid
+gem 'jquery-rails', '~> 4.3', '>= 4.3.3'
+gem 'rails-ujs', '~> 0.1.0'
+
 gem 'puma', '~> 3.11'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'

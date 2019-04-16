@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
-  resources :groups
+  resources :friendships
+  post '/friendships/create', to: 'friendships#create'
+  post '/friendships/destroy', to: 'friendships#destroy'
+  post '/groups/update', to: 'groups#update'
+  resources :groups 
+  post 'groups/addmember' , to: 'groups#addmember'
+  get 'groups/:id/deletemember' , to: 'groups#deletemember'
   # get 'groups/index'
   # get 'groups/show'
   # get 'groups/new'
