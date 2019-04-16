@@ -1,2 +1,7 @@
 <h1>Groups#show</h1>
 <p>Find me in app/views/groups/show.html.erb</p>
+<%= form_with scope: :group, :url => { :action => "uppddate", :id =>params[:id]},local: true do |form| %>
+    <label>add friend name</label>
+    <%= form.text_field :friend_name %><br>
+    <%= form.submit "add" %>
+  <% end %>

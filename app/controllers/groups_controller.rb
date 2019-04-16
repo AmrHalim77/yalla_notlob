@@ -4,6 +4,9 @@ class GroupsController < ApplicationController
   def index
     @groups=Group.all
   end
+  def uppddate
+    
+  end
 
   def show
   end
@@ -39,7 +42,7 @@ class GroupsController < ApplicationController
   end
   
   def group_params
-    params.require(:group).permit(:name, :user_id)
+    params.require(:group).permit(:name, :user_id, :friend_id)
   end  
 
 end
