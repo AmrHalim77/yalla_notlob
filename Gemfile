@@ -13,6 +13,11 @@ gem 'attach', '~> 1.0.1'
 gem 'devise' 
 #Jquery
 gem 'jquery-rails' 
+# google and facebook auth
+gem 'omniauth-google-oauth2', '~> 0.2.2'
+gem 'google-api-client', '~> 0.13.6'
+gem 'omniauth-facebook'
+
 # Use Puma as the app server
 gem 'puma', '~> 3.11'
 # Use SCSS for stylesheets
