@@ -12,6 +12,11 @@ class OrderController < ApplicationController
     redirect_to :controller => 'item' , :action => 'index' , :id => params[:id]
   end
 
+  def display_notification
+    @order = Order.find(params[:format])
+    redirect_to :controller => 'item' , :action => 'index' , :id => params[:format]
+  end
+
   def show   
     @order = Order.find(params[:id])   
   end   
@@ -25,6 +30,7 @@ class OrderController < ApplicationController
     @order = Order.new(order_params.merge({:user=>current_user , :order_status=>"waiting"}))   
     if @order.save   
       # flash[:notice] = 'Order added!' 
+      @order.notify :users, key: "created an order", parameters: { :text => "hello",:restaurant => order_params["restaurant"] , :owner => current_user.email }
       redirect_to action: "index"
     else   
       flash[:error] = 'Failed to edit Order!'   
@@ -44,6 +50,7 @@ class OrderController < ApplicationController
   def update
     @order = Order.find(params[:id])
     if @order.update_attribute(:order_status, "finished" )
+      @order.notify :users, key: "finished an order", parameters: { :text => "hello",:restaurant => @order[:restaurant] , :owner => current_user.email } 
       flash[:notice]="Order is finished!"
       redirect_to action: "index"
 
@@ -57,6 +64,7 @@ class OrderController < ApplicationController
 
     @order = Order.find(params[:id])
     if @order.delete
+      @order.notify :users, key: "cancelled an order", parameters: { :text => "hello",:restaurant => @order[:restaurant] , :owner => current_user.email } 
       flash[:notice] = "order cancelled!"
       redirect_to action: "index"
     else
