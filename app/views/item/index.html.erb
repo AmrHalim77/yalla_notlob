@@ -42,3 +42,10 @@
     <%= form.text_area :comment, size: "20x5" %><br><br>
     <%= form.submit "add" %>
   <% end %>
+
+
+  <tr>
+    <%= link_to "#{@invited} friends Invited", "/item/listInvited?order_id=#{@order.id}" %>
+    <br>
+    <%= link_to "#{@joined} friends Joined", "/item/listJoined?order_id=#{@order.id}" %>
+  </tr>

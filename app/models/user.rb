@@ -8,6 +8,7 @@ class User < ApplicationRecord
   serialize :friends
   # serialize :groups
   # serialize :orders
+  has_many :orderusers
   has_many :groupmembers
   has_many :friendships
   has_many :friends, :through => :friendships

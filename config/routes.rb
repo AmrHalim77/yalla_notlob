@@ -22,6 +22,9 @@ Rails.application.routes.draw do
   get 'order/toitem'
   post 'order/update' 
   get 'order/destroy'
+  get 'order/listall' ,to: 'order#listall'
+  get 'order/addfriend' ,to: 'order#addfriend'
+  get 'order/addgroup' ,to: 'order#addgroup'
   get 'user/index'
   get 'user/friend'
   post 'user/addfriend'
@@ -33,5 +36,8 @@ Rails.application.routes.draw do
   get 'item/edit'
   get 'item/update' 
   get 'item/destroy'
+  get 'item/listInvited' ,to: 'item#listInvited'
+  get 'item/listJoined' ,to: 'item#listJoined'
+  get 'item/deleteInvited' ,to: 'item#deleteInvited'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

@@ -17,15 +17,17 @@ class OrderController < ApplicationController
   end   
 
   def new
-    @order = Order.new
+
   end
 
   def create
 
     @order = Order.new(order_params.merge({:user=>current_user , :order_status=>"waiting"}))   
+    
+    
     if @order.save   
       # flash[:notice] = 'Order added!' 
-      redirect_to action: "index"
+      redirect_to "/order/listall?order_id=#{@order.id}"
     else   
       flash[:error] = 'Failed to edit Order!'   
       redirect_to "/order/index" 
@@ -63,6 +65,37 @@ class OrderController < ApplicationController
       flash[:error] = "couldn't cancel order!"
       redirect_to action: "index"
     end
+  end
+
+  def listall
+    @order_id = params[:order_id]
+    @groups = Group.where("user_id = #{current_user.id}")
+    @friends = Friendship.where("user_id = #{current_user.id}")
+  end
+
+  def addfriend
+    @order_id = params[:order_id]
+    @user_id = params[:user_id]
+    @order_user = Orderuser.new({:order_id => @order_id, :user_id => @user_id, :status => 0})
+    @order_user.save
+    # redirect_to action: "listall"
+    redirect_to "/order/listall?order_id=#{@order_id}"
+
+  end
+
+  def addgroup
+    @group_id = params[:group_id]
+    @order_id = params[:order_id]
+    @groupmembers = Groupmember.where("group_id = #{@group_id}")
+    p "****************************************"
+    p @groupmembers.length
+    p @group_id
+    p "****************************************"
+    @groupmembers.each do |member|
+      @order_user = Orderuser.new({:order_id => @order_id, :user_id => member.user_id, :status => 0})
+      @order_user.save
+    end
+    redirect_to "/order/listall?order_id=#{@order_id}"
   end
 
 
