@@ -6,8 +6,10 @@ class User < ApplicationRecord
   #has_many :groups, dependent: :destroy
   has_many :orders, dependent: :destroy
   serialize :friends
+  acts_as_target
   # serialize :groups
   # serialize :orders
+  has_many :orderusers
   has_many :groupmembers
   has_many :friendships
   has_many :friends, :through => :friendships

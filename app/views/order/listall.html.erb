@@ -1,0 +1,22 @@
+<table>
+    <tr>
+        <td><h1>Friends<h1></td>
+    </tr>
+    <% @friends.each do |friend| %>
+        <% @user = User.find(friend.friend_id) %>
+        <tr>
+            <td><%= @user.email %></td>
+            <td><%= link_to "Invite", "/order/addfriend?order_id=#{@order_id}&&user_id=#{@user.id}"%> </td>
+        </tr>
+    <% end %>
+    <tr>
+        <td><h1>Groups<h1></td>
+    </tr>
+    <% @groups.each do |group| %>
+        <tr>
+            <td><%= group.name %></td>
+            <td><%= link_to "Invite", "/order/addgroup?order_id=#{@order_id}&&group_id=#{group.id}"%> </td>
+        </tr>
+    <% end %>
+</table>
+<td><%= link_to "Submit", "/order/index"%> </td>

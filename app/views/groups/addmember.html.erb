@@ -1,24 +1,13 @@
-aaaaaaaaaaaaaaaaaaaa
 <% @member.each do |member| %>
     <tr>
     <td><%=member.email %><td>
-    <td><%=member.id %><td>
-    
-
-    
-    
+    <td><%=member.id %><td>    
     </tr>
-    
     <% end %>
     <td><%=@add_member %><td>
     <% @friendship.each do |friendship| %>
         <tr>
         <td><%=friendship.user_id%><td>
         <td><%=friendship.friend_id %><td>
-        
-    
-        
-        
-        </tr>
-        
+        </tr>     
         <% end %>

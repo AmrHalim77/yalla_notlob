@@ -11,6 +11,8 @@
       <th>Price</th>
       <th>Status</th>
       <th>Actions</th>
+      <th>Invited Friends</th>
+      <th>Joined Friends</th>
     </tr>   
 
     <% @orders.each do |order| %>
@@ -19,12 +21,15 @@
           <td><%= order.restaurant %></td>
           <td><%= order.invited_users %></td>
           <td><%= order.order_status %></td>
+          <% @allOrders = Orderuser.where("order_id = #{order.id}")%>
+          <% @invited = @allOrders.where("status = 0").count %>
+          <% @joined = @allOrders.where("status = 1").count %>
+          <td><%= @invited %></td>
+          <td><%= @joined %></td>
           <td>
-
           <%= link_to('view',{:action => 'toitem',:id => order.id}) %>
           <%= link_to('finish',{:action => 'update',:id => order.id}, method: :post) %>
           <%= link_to('cancel',{:action => 'destroy',:id => order.id}) %>
-         
           </td>
       </tr>
     <% end %>

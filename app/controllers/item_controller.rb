@@ -2,6 +2,9 @@ class ItemController < ApplicationController
   def index 
     @items = Item.where(:order_id => params[:id])
     @order = Order.find(params[:id])
+    @allOrders = Orderuser.where("order_id = #{params[:id]}")
+    @invited = @allOrders.where("status = 0").count 
+    @joined = @allOrders.where("status = 1").count 
   end
 
   def show
@@ -42,10 +45,39 @@ class ItemController < ApplicationController
   end
 
   def destroy
+    p params[:id].to_i
+    
+    p params[:id_order].to_i
+
+
+    @removed_item = Item.find(params[:id])
+    p "he"
+    p params
+    @removed_item.destroy
+    redirect_to :action => 'index' , :id => params[:id_order].to_i
+    
   end
 
   def item_params   
     params.require(:item).permit(:item_name, :amount, :price, :comment, :order_id)   
   end   
+
+  def listInvited
+    @invited = Orderuser.where("order_id = #{params[:order_id]} AND status = 0")
+  end
+
+  def listJoined
+    @joined = Orderuser.where("order_id = #{params[:order_id]} AND status = 1")
+  end
+
+  def deleteInvited
+    @order_id = params[:order_id]
+    @user = Orderuser.where("order_id = #{params[:order_id]} AND user_id = #{params[:user_id]}")
+    p "*****************************************"
+    p @user
+    p "*****************************************"
+    @user.delete(@user.ids[0])
+    redirect_to "/item/listInvited?order_id=#{@order_id}"
+  end
 
 end 
