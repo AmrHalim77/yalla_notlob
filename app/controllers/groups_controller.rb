@@ -4,11 +4,6 @@ class GroupsController < ApplicationController
   def index
     @groups=Group.where(:user_id => current_user.id)
   end
-<<<<<<< HEAD
-  def uppddate
-    
-  end
-=======
   def addmember
     @a = params[:group]
     @member = User.where(:email => @a["email"]) 
@@ -19,7 +14,6 @@ class GroupsController < ApplicationController
     @add_member.group_id = params[:group_id]
     @add_member.user_email = @a["email"]
     @add_member.save
->>>>>>> c6d2ffd895496a327ce19a7f874ad21f3a9562e6
 
 
      @asd = params[:email]
@@ -83,11 +77,7 @@ class GroupsController < ApplicationController
   end
   
   def group_params
-<<<<<<< HEAD
-    params.require(:group).permit(:name, :user_id, :friend_id)
-=======
     params.require(:group).permit(:name,:group_id, :email)
->>>>>>> c6d2ffd895496a327ce19a7f874ad21f3a9562e6
   end  
 
 end
