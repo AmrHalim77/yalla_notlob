@@ -11,6 +11,10 @@ gem 'sqlite3'
 gem 'attach', '~> 1.0.1'
 #devise
 gem 'devise' 
+
+#notification 
+gem 'activity_notification'
+
 #Jquery
 # gem 'jquery-rails' 
 # Use Puma as the app server

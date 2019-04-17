@@ -45,6 +45,17 @@ class ItemController < ApplicationController
   end
 
   def destroy
+    p params[:id].to_i
+    
+    p params[:id_order].to_i
+
+
+    @removed_item = Item.find(params[:id])
+    p "he"
+    p params
+    @removed_item.destroy
+    redirect_to :action => 'index' , :id => params[:id_order].to_i
+    
   end
 
   def item_params   
