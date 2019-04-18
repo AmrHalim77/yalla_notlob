@@ -15,9 +15,9 @@
             
           <div class="left">
               <a class="active" href="http://localhost:3000">Home</a>
-              <a href="http://localhost:3000/friendships/new">Friends</a>
-              <a href="http://localhost:3000/groups">Groups</a>
-              <a href="http://localhost:3000/order/index">Orders</a>
+              <%= link_to "Friends", new_friendship_path %>
+              <%= link_to "Groups", groups_path %>
+              <%= link_to "Orders", order_index_path %>
             
           </div>   
           <div class="right">
@@ -31,7 +31,10 @@
              <% else %>
               <%= link_to('Login', new_user_session_path)  %>  
               <% end %>
+
+              <%= link_to 'notifications_center' ,  user_notifications_list_path %>
       </div>
+      
       </div>
   </div>
     <%= yield %>
