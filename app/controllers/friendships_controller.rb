@@ -14,6 +14,7 @@ class FriendshipsController < ApplicationController
     def create
       @friendship = current_user.friendships.build(:friend_id => params[:friend_id])
       if @friendship.save
+        @friendship.notify :users, key: "add you as a friend" , parameters: { :text => "hello", :owner => current_user.email } 
           
         render json: {error:false, msg:"friendship created", user: User.find(params[:friend_id])}
       else

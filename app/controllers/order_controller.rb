@@ -14,6 +14,10 @@ class OrderController < ApplicationController
 
   def display_notification
     @order = Order.find(params[:format])
+    @order_users=Orderuser.where(order_id: params[:format], user_id: current_user.id) 
+    @order_users.first.status =1
+    @order_users.first.save
+
     redirect_to :controller => 'item' , :action => 'index' , :id => params[:format]
   end
 
@@ -52,7 +56,8 @@ class OrderController < ApplicationController
   def update
     @order = Order.find(params[:id])
     if @order.update_attribute(:order_status, "finished" )
-      @order.notify :users, key: "finished an order", parameters: { :text => "hello",:restaurant => @order[:restaurant] , :owner => current_user.email } 
+      p  @order
+      @order.notify :users, key: "finished an order" , parameters: { :text => "hello",:restaurant => @order[:restaurant] , :owner => current_user.email } 
       flash[:notice]="Order is finished!"
       redirect_to action: "index"
 
@@ -62,11 +67,19 @@ class OrderController < ApplicationController
     end
   end
 
-  def destroy
 
+
+  def destroy
     @order = Order.find(params[:id])
+    @ordusers=Orderuser.where(order_id: params[:id])    
+
+    @ordusers.each do |unit|
+      @order.invited_users= unit.user_id.to_s
+      @order.notify :users, key: "cancelled an order" , parameters: { :text => "hello",:restaurant => @order[:restaurant] , :owner => current_user.email } 
+      unit.destroy
+    end
+    # @ordusers.destroy_all 
     if @order.delete
-      @order.notify :users, key: "cancelled an order", parameters: { :text => "hello",:restaurant => @order[:restaurant] , :owner => current_user.email } 
       flash[:notice] = "order cancelled!"
       redirect_to action: "index"
     else
@@ -74,6 +87,8 @@ class OrderController < ApplicationController
       redirect_to action: "index"
     end
   end
+
+
 
   def listall
     @order_id = params[:order_id]
@@ -96,6 +111,8 @@ class OrderController < ApplicationController
     redirect_to "/order/listall?order_id=#{@order_id}"
 
   end
+
+
 
   def addgroup
     @group_id = params[:group_id]
