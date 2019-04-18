@@ -11,8 +11,12 @@ class Order < ApplicationRecord
     # with parameters as value or custom methods defined in your model as lambda or symbol.
     # The first argument is the plural symbol name of your target model.
     acts_as_notifiable :users,
-    targets: ->(order, key) {
-        User.all
+    targets: ->(order, key ) {
+        if key == "invited you to order"
+            [User.find(order.invited_users)]
+        else
+            p "hi"
+        end
     },notifiable_path: :order_notifiable_path
 
     # Notification targets as :targets is a necessary option
@@ -22,6 +26,7 @@ class Order < ApplicationRecord
     # },notifiable_path: :article_notifiable_path
 
     def order_notifiable_path
+        
         order_display_notification_path(id)
         # redirect_to "/order/index" 
         # order_index_path()

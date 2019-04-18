@@ -33,8 +33,7 @@ class OrderController < ApplicationController
     if @order.save   
       # flash[:notice] = 'Order added!' 
       redirect_to "/order/listall?order_id=#{@order.id}"
-      @order.notify :users, key: "created an order", parameters: { :text => "hello",:restaurant => order_params["restaurant"] , :owner => current_user.email }
-      redirect_to action: "index"
+      # redirect_to action: "index"
     else   
       flash[:error] = 'Failed to edit Order!'   
       redirect_to "/order/index" 
@@ -84,9 +83,15 @@ class OrderController < ApplicationController
 
   def addfriend
     @order_id = params[:order_id]
+    @order= Order.find(params[:order_id])
+    p @order
     @user_id = params[:user_id]
     @order_user = Orderuser.new({:order_id => @order_id, :user_id => @user_id, :status => 0})
-    @order_user.save
+    
+    if @order_user.save
+      @order.invited_users=@user_id.to_s
+      @order.notify :users, key: "invited you to order" , parameters: { :text => "hello",:restaurant => @order[:restaurant] , :owner => current_user.email }
+    end 
     # redirect_to action: "listall"
     redirect_to "/order/listall?order_id=#{@order_id}"
 
@@ -100,9 +105,13 @@ class OrderController < ApplicationController
     p @groupmembers.length
     p @group_id
     p "****************************************"
+    @order= Order.find(params[:order_id])
     @groupmembers.each do |member|
       @order_user = Orderuser.new({:order_id => @order_id, :user_id => member.user_id, :status => 0})
-      @order_user.save
+      if @order_user.save
+        @order.invited_users=@order_user.user_id.to_s
+        @order.notify :users, key: "invited you to order" , parameters: { :text => "hello",:restaurant => @order[:restaurant] , :owner => current_user.email } 
+      end
     end
     redirect_to "/order/listall?order_id=#{@order_id}"
   end
