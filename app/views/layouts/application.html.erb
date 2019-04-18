@@ -15,19 +15,22 @@
             
           <div class="left">
               <a class="active" href="http://localhost:3000">Home</a>
-              <a href="#friends">Friends</a>
-              <a href="#groups">Groups</a>
+              <a href="http://localhost:3000/friendships/new">Friends</a>
+              <a href="http://localhost:3000/groups">Groups</a>
               <a href="http://localhost:3000/order/index">Orders</a>
             
           </div>   
           <div class="right">
               <a href="#" class="notification">
                       <span>Inbox</span>
-                      <span class="badge">3</span>
+                      <span class="badge">?</span>
                     </a>
-             
-             <a href="#userame">husername</a> 
-             <a href="#logout">Logout</a>
+             <a href="http://localhost:3000">user name</a> 
+             <% if user_signed_in? %>
+                <%= link_to('Logout', destroy_user_session_path, method: :delete) %>        
+             <% else %>
+              <%= link_to('Login', new_user_session_path)  %>  
+              <% end %>
       </div>
       </div>
   </div>
