@@ -4,7 +4,12 @@ class OrderController < ApplicationController
   end
   
   def index
-  @orders = Order.where(:user_id => current_user.id)
+    @orders = Order.where(:user_id => current_user.id)
+    @user_orders = Orderuser.where("user_id = #{current_user.id} AND status = 1")
+    @joined_orders = []
+    @user_orders.each do |order|
+      @joined_orders << Order.find(order.order_id)
+    end
   end
 
   def toitem
@@ -34,7 +39,7 @@ class OrderController < ApplicationController
       # flash[:notice] = 'Order added!' 
       redirect_to "/order/listall?order_id=#{@order.id}"
       @order.notify :users, key: "created an order", parameters: { :text => "hello",:restaurant => order_params["restaurant"] , :owner => current_user.email }
-      redirect_to action: "index"
+      # redirect_to action: "index"
     else   
       flash[:error] = 'Failed to edit Order!'   
       redirect_to "/order/index" 
