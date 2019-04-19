@@ -54,16 +54,14 @@ class OrderController < ApplicationController
 
   # GET method for editing a Order based on id
   def edit
-
     @order = Order.find(params[:id])
-
   end
 
   def update
     @order = Order.find(params[:id])
     if @order.update_attribute(:order_status, "finished" )
       p  @order
-      @order.notify :users, key: "finished an order" , parameters: { :text => "hello",:restaurant => @order[:restaurant] , :owner => current_user.email } 
+      @order.notify :users, key: "finished an order from" , parameters: { :text => "hello",:restaurant => @order[:restaurant] , :owner => current_user.email } 
       flash[:notice]="Order is finished!"
       redirect_to action: "index"
 
@@ -81,7 +79,7 @@ class OrderController < ApplicationController
 
     @ordusers.each do |unit|
       @order.invited_users= unit.user_id.to_s
-      @order.notify :users, key: "cancelled an order" , parameters: { :text => "hello",:restaurant => @order[:restaurant] , :owner => current_user.email } 
+      @order.notify :users, key: "cancelled an order from" , parameters: { :text => "hello",:restaurant => @order[:restaurant] , :owner => current_user.email } 
       unit.destroy
     end
     # @ordusers.destroy_all 
@@ -111,7 +109,7 @@ class OrderController < ApplicationController
     
     if @order_user.save
       @order.invited_users=@user_id.to_s
-      @order.notify :users, key: "invited you to order" , parameters: { :text => "hello",:restaurant => @order[:restaurant] , :owner => current_user.email }
+      @order.notify :users, key: "invited you to order from" , parameters: { :text => "hello",:restaurant => @order[:restaurant] , :owner => current_user.email }
     end 
     # redirect_to action: "listall"
     redirect_to "/order/listall?order_id=#{@order_id}"
@@ -129,7 +127,7 @@ class OrderController < ApplicationController
       @order_user = Orderuser.new({:order_id => @order_id, :user_id => member.user_id, :status => 0})
       if @order_user.save
         @order.invited_users=@order_user.user_id.to_s
-        @order.notify :users, key: "invited you to order" , parameters: { :text => "hello",:restaurant => @order[:restaurant] , :owner => current_user.email } 
+        @order.notify :users, key: "invited you to order from" , parameters: { :text => "hello",:restaurant => @order[:restaurant] , :owner => current_user.email } 
       end
     end
     redirect_to "/order/listall?order_id=#{@order_id}"
