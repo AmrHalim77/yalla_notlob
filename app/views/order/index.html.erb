@@ -1,24 +1,24 @@
-<h1>Order#index</h1>
-<p>Find me in app/views/order/index.html.erb</p>
-<h2>Orders you created:</h2>
-<a href="/order/new">add order</a>
 
-<table >
+<h2>Orders</h2>
+<a href="/order/new" class="text-right">Start new order</a>
+      
+
+<table class="table table-striped">
+    <thead>
     <tr>
-      <th>Order<th>
-      <th>Restaurant</th>
-      <th>Invited</th>
-      <th>Price</th>
-      <th>Status</th>
-      <th>Actions</th>
-      <th>Invited Friends</th>
-      <th>Joined Friends</th>
-    </tr>   
-
+      <th scope="col">Order<th>
+      <th scope="col">Restaurant</th>
+      <th scope="col">Invited</th>
+      <th scope="col">Price</th>
+      <th scope="col">Status</th>
+      <th scope="col">Actions</th>
+    </tr>  
+    </thead> 
+   <tbody>
     <% @orders.each do |order| %>
       <tr>
           <td><%= order.order_type %></td>
-          <td><%= order.restaurant %></td>
+          <td ><%= order.restaurant %></td>
           <td><%= order.invited_users %></td>
           <td><%= order.order_status %></td>
           <% @allOrders = Orderuser.where("order_id = #{order.id}")%>
@@ -35,34 +35,19 @@
           </td>
       </tr>
     <% end %>
-   
-</table>
-<br>
-<h2>Orders you are part of:</h2>
-
-<table >
-    <tr>
-      <th>Order<th>
-      <th>Restaurant</th>
-      <th>Invited</th>
-      <th>Price</th>
-      <th>Status</th>
-      <th>Actions</th>
-      <th>Invited Friends</th>
-      <th>Joined Friends</th>
-    </tr>   
+    </tbody>
 
     <% @joined_orders.each do | order| %>
       <tr>
-          <td><%= order.order_type %></td>
-          <td><%= order.restaurant %></td>
-          <td><%= order.invited_users %></td>
-          <td><%= order.order_status %></td>
+          <td class="orderText"><%= order.order_type %></td>
+          <td  class="orderText" ><%= order.restaurant %></td>
+          <td  class="orderText"><%= order.invited_users %></td>
+          <td  class="orderText"><%= order.order_status %></td>
           <% @allOrders = Orderuser.where("order_id = #{order.id}")%>
           <% @invited = @allOrders.where("status = 0").count %>
           <% @joined = @allOrders.where("status = 1").count %>
-          <td><%= @invited %></td>
-          <td><%= @joined %></td>
+          <td  class="orderText"><%= @invited %></td>
+          <td  class="orderText"><%= @joined %></td>
           <td>
           <%= link_to('view',{:action => 'toitem',:id => order.id}) %>
           <% if order.user_id == current_user.id %>

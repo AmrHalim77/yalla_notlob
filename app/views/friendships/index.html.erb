@@ -33,13 +33,14 @@
         </div>
         <div class='col-sm-8'" style='padding-left: 30px'>
             <h4><%= friendship.friend.email %></h4>
-            <td><a id="<%= friendship.friend_id %>" class="rmFriend", onclick="del(this)", data=<%= friendship.friend_id  %>>Destroy</a></td>
-            <%= link_to 'Unfreind', friendship, method: :delete, data: { confirm: 'Are you sure?' } %>
+            <td><a id="<%= friendship.friend_id %>" class="rmFriend", onclick="del(this)", data=<%= friendship.friend_id  %>>Unfriend</a></td>
+            
             
         </div>
       </div>
       <% end %>
   <% end %>
+
 </div>
 <%if @usersearch != nil %>
   <div class="col-md-12" >
@@ -79,26 +80,9 @@
     <% end %>
 <% end %>
 
-<table class="table table-hover">
-      <!-- end -->
-  <thead>
-    <tr>
-      <th>User</th>
-      <th>Friend</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @friendships.each do |friendship| %>
-      <tr>
-        <td> <%= friendship.user.name %> </td>
-        <td> <%= friendship.friend.name %> </td>
-        <td><%= link_to 'Destroy', friendship, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<!-- 
+david test 222
+-->
 
 <br>
 <!--  
@@ -108,6 +92,7 @@
 <script type="text/javascript">
     $(".addFriend").click(function(e){
       e.preventDefault();
+      console.log("add friend")
       fid = $(this).attr("data");
       row = $(this).parents("tbody")
       $.ajax({
@@ -115,16 +100,21 @@
         method:"post",
         data:{friend_id:fid},
         success:function(res){
-          if(!res.error)
-          {
+         // if(!res.error)
+         // {
             row.html("");
             txt = "<div class='col-md-3' style='padding-bottom: 10px; padding-top: 10px'><div class='col-sm-4' style='width:70px;'></div><div class='col-sm-8' style='padding-left: 30px'><h4>"+res.user.name+"</h4><td><a id='"+res.user.id+"' class='rmFriend', onclick='del(this)', data='"+res.user.id+"'>Destroy</a></td></div>"
             $("#friendList").append(txt);
-          }
+            location.reload();
+            console.log("after reload")
+            // $('#category-wrapper').load(link.attr('href'));
+
+        //  }
 
         }
       });
-    })
+      location.reload()
+    }) 
   function del(e){
 
 
@@ -140,6 +130,7 @@
           
             row.html("");
             $("#"+fid).parent().parent().remove();
+             location.reload();
         }
       });
     }
