@@ -1,0 +1,4 @@
+<% @joined.each do |user|%>
+    <% @myUser = User.find(user.user_id)%>
+    <p><%= @myUser.email %></p>    
+<% end %>

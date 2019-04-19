@@ -10,6 +10,33 @@
   </head>
 
   <body>
+  <div class="up">
+      <div class="topnav">
+            
+          <div class="left">
+              <a class="active" href="http://localhost:3000">Home</a>
+              <%= link_to "Friends", new_friendship_path %>
+              <%= link_to "Groups", groups_path %>
+              <%= link_to "Orders", order_index_path %>
+            
+          </div>   
+          <div class="right">
+              <a href="#" class="notification">
+                      <span>Inbox</span>
+                      <span class="badge">?</span>
+                    </a>
+             <a href="http://localhost:3000">user name</a> 
+             <% if user_signed_in? %>
+                <%= link_to('Logout', destroy_user_session_path, method: :delete) %>        
+             <% else %>
+              <%= link_to('Login', new_user_session_path)  %>  
+              <% end %>
+
+              <%= link_to 'notifications_center' ,  user_notifications_list_path %>
+      </div>
+      
+      </div>
+  </div>
     <%= yield %>
   </body>
 </html>

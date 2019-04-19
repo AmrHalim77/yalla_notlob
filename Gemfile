@@ -11,14 +11,21 @@ gem 'sqlite3'
 gem 'attach', '~> 1.0.1'
 #devise
 gem 'devise' 
+
+#notification 
+gem 'activity_notification'
+
 #Jquery
-gem 'jquery-rails' 
 # google and facebook auth
 gem 'omniauth-google-oauth2', '~> 0.2.2'
 gem 'google-api-client', '~> 0.13.6'
 gem 'omniauth-facebook'
 
 # Use Puma as the app server
+#add for devid
+gem 'jquery-rails', '~> 4.3', '>= 4.3.3'
+gem 'rails-ujs', '~> 0.1.0'
+
 gem 'puma', '~> 3.11'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'

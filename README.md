@@ -22,3 +22,23 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+
+<h1>Add new Friends to Group </h1>
+<%= form_tag('/groups/update', :method => "post", id: "search-form") do %>
+<%= text_field_tag :search, params[:search], placeholder: "Search Users",list:"usersEmails" %>
+  <datalist id="usersEmails">
+
+  <%= hidden_field_tag :id_friend, params[:id]  %>
+
+  <%= select_tag :search,params[:search] %>
+    <% @users.each do |useremail| %>
+      <option value= "<%= useremail.email %>" ></option> 
+    <% end %>
+    </select>
+
+  </datalist>
+  <%= submit_tag "Search" ,:onclick => "return validateform()" %>
+<% end %>
+  
+  

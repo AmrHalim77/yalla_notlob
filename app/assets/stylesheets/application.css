@@ -14,3 +14,72 @@
  *= require_self
  */
  @import "bootstrap";
+
+ /* Add a black background color to the top navigation bar */
+.topnav {
+    overflow: hidden;
+    background-color: #e9e9e9;
+  }
+  
+  .up{
+      height: 30%;
+  }
+
+  /* Style the links inside the navigation bar */
+  .topnav a {
+    float: left;
+    display: block;
+    color: black;
+    text-align: center;
+    padding: 1em 0.5em;
+    text-decoration: none;
+    font-size: 1em;
+  }
+  
+  /* Change the color of links on hover */
+  .topnav a:hover {
+    background-color: #ddd;
+    color: black;
+  }
+  
+  /* Style the "active" element to highlight the current page */
+  .topnav a.active {
+    background-color: #2196F3;
+    color: white;
+  }
+
+  .topnav .notification {
+    background-color: #555;
+    color: white;
+    text-decoration: none;
+    padding: 1em 0.5em;
+    position: relative;
+    display: inline-block;
+    border-radius: 0.1em;
+  }
+  
+  .topnav .notification:hover {
+    background: red;
+  }
+  
+  .topnav .notification .badge {
+    position: absolute;
+    top: 2.5em;
+    right: -0.5em;
+    padding: 0.1em 0.5emx;
+    border-radius: 50%;
+    background: red;
+    color: white;
+  }
+  .right{
+      float: right;
+      padding: 0%;
+  }
+  .left{
+    float: left;
+    padding: 0%;
+}
+
+input.orderText {
+  text-align: center
+}
