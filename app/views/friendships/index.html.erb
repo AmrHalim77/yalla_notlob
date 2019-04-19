@@ -31,9 +31,15 @@
         <div class='col-sm-4' style='width:70px;'>
         
         </div>
-        <div class='col-sm-8'" style='padding-left: 30px'>
-            <h4><%= friendship.friend.email %></h4>
-            <td><a id="<%= friendship.friend_id %>" class="rmFriend", onclick="del(this)", data=<%= friendship.friend_id  %>>Unfriend</a></td>
+        <div class='col-sm-8 card' style='padding-left: 30px'>
+        <div class="card-title">
+            <%= friendship.friend.email %>
+            </div>
+
+            <td class="card-link">
+            <a id="<%= friendship.friend_id %>" class="rmFriend", onclick="del(this)", data=<%= friendship.friend_id  %>>Unfriend</a>
+            
+            </td>
             
             
         </div>
@@ -80,13 +86,7 @@
     <% end %>
 <% end %>
 
-<!-- 
-david test 222
--->
 
-<br>
-<!--  
-<%= link_to 'New Friendship', new_friendship_path %>-->
 </div>
 
 <script type="text/javascript">

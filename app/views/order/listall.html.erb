@@ -1,22 +1,48 @@
-<table>
-    <tr>
-        <td><h1>Friends<h1></td>
-    </tr>
-    <% @friends.each do |friend| %>
+
+<div class="container">
+ <div class="row">
+<div class="col-6">
+<h1>Friends<h1>
+ <table class="table">
+  <thead class="thead-dark">
+    
+ <tr>
+ <th scope="col">Friend Email</th>
+ <th scope="col">Action</th>
+ </tr>
+ </thead>
+   <tbody>
+ <% @friends.each do |friend| %>
         <% @user = User.find(friend.friend_id) %>
         <tr>
-            <td><%= @user.email %></td>
-            <td><%= link_to "Invite", "/order/addfriend?order_id=#{@order_id}&&user_id=#{@user.id}"%> </td>
+            <td scope="row"><%= @user.email %></td>
+            <td scope="row"><%= link_to "Invite", "/order/addfriend?order_id=#{@order_id}&&user_id=#{@user.id}",:class=>"btn btn-primary"%> </td>
         </tr>
     <% end %>
-    <tr>
-        <td><h1>Groups<h1></td>
-    </tr>
-    <% @groups.each do |group| %>
+    </tbody>
+ </table>
+ 
+</div>
+<div class="col-6">
+<h1>Groups<h1>
+<table class="table">
+<thead class="thead-dark">
+ <tr>
+ <th>Group Name</th>
+ <th>Action</th>
+ </tr>
+ </thead>
+ <tbody>
+<% @groups.each do |group| %>
         <tr>
             <td><%= group.name %></td>
-            <td><%= link_to "Invite", "/order/addgroup?order_id=#{@order_id}&&group_id=#{group.id}"%> </td>
+            <td><%= link_to "Invite", "/order/addgroup?order_id=#{@order_id}&&group_id=#{group.id}",:class=> "btn btn-primary"%> </td>
         </tr>
-    <% end %>
-</table>
-<td><%= link_to "Submit", "/order/index"%> </td>
+      <% end %>
+</tbody>
+ </table>
+</div>
+
+<%= link_to "Publish", "/order/index" ,:class=>  "btn btn-large btn-block btn-primary"%> 
+</div>
+</div>

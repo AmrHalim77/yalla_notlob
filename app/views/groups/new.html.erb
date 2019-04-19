@@ -1,10 +1,13 @@
+<div  class="col-md-4 col-md-offset-4" >
 <h1>Add new Group</h1>
 
 <%= form_for(@group) do |f| %>
 
-<div class="field">
+<div class="field form-group">
+
 <%= f.label :Group_Name %>
-<%= f.text_field :name %>
+<%= f.text_field :name ,:class=>"form-control" %>
+
 </div>
 <div class="actions">
 <%= f.submit %>
@@ -14,4 +17,5 @@
  <% end %>   
 
 
-<%= link_to 'Back', groups_path %>
+<%= link_to 'Back', groups_path,:class=>"btn btn-primary" %>
+</div>

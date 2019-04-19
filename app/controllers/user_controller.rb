@@ -1,9 +1,13 @@
 class UserController < ApplicationController
   before_action :authenticate_user!
   def index
-    @users = User.all
-    @notifications = current_user.notifications
-    p @notifications
+    @friends = Friendship.where(:user_id => current_user.id)
+    @friendsids = []
+    @friends.each do |idd|
+    @friendsids.push(idd.friend_id)
+    end
+    @orders = Order.where(:user_id => current_user.id)
+   
   end
 
   def friend
@@ -17,7 +21,7 @@ class UserController < ApplicationController
 
   end
 
-
+  
   def notifications_list
     p "heloo"
     @notifications = current_user.notifications.unopened_only
@@ -34,8 +38,5 @@ class UserController < ApplicationController
 
   def login
   end
-
-
-
 
 end
