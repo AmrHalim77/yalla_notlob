@@ -1,6 +1,17 @@
+<h2>Orders you created:</h2>
+<a href="/order/new" class="btn btn-success">add order</a>
 
-<h2>Orders</h2>
-<a href="/order/new" class="text-right">Start new order</a>
+<table class="table table-striped">
+    <tr>
+      <th>Order<th>
+      <th>Restaurant</th>
+      <th>Invited</th>
+      <th>Price</th>
+      <th>Status</th>
+      <th>Actions</th>
+      <th>Invited Friends</th>
+      <th>Joined Friends</th>
+    </tr>   
       
 
 <table class="table table-striped">
@@ -17,24 +28,40 @@
    <tbody>
     <% @orders.each do |order| %>
       <tr>
-          <td><%= order.order_type %></td>
-          <td ><%= order.restaurant %></td>
-          <td><%= order.invited_users %></td>
-          <td><%= order.order_status %></td>
+          <td> <%= order.order_type %></td>
+          <td> <%= order.restaurant %></td>
+          <td> <%= order.invited_users %></td>
+          <td> <%= order.order_status %></td>
           <% @allOrders = Orderuser.where("order_id = #{order.id}")%>
           <% @invited = @allOrders.where("status = 0").count %>
           <% @joined = @allOrders.where("status = 1").count %>
           <td><%= @invited %></td>
           <td><%= @joined %></td>
           <td>
-          <%= link_to('view',{:action => 'toitem',:id => order.id}) %>
+          <%= link_to('view',{:action => 'toitem',:id => order.id},class:"btn btn-primary") %>
           <% if order.user_id == current_user.id %>
-          <%= link_to('finish',{:action => 'update',:id => order.id}, method: :post) %>
-          <%= link_to('cancel',{:action => 'destroy',:id => order.id}) %>
+          <%= link_to('finish',{:action => 'update',:id => order.id},class:"btn btn-primary", method: :post) %>
+          <%= link_to('cancel',{:action => 'destroy',:id => order.id},class:"btn btn-primary") %>
           <% end %>
           </td>
       </tr>
     <% end %>
+   
+</table>
+<br>
+<h2>Orders you are part of:</h2>
+
+<table class="table table-striped">
+    <tr>
+      <th>Order<th>
+      <th>Restaurant</th>
+      <th>Invited</th>
+      <th>Price</th>
+      <th>Status</th>
+      <th>Actions</th>
+      <th>Invited Friends</th>
+      <th>Joined Friends</th>
+    </tr>   
     </tbody>
 
     <% @joined_orders.each do | order| %>
@@ -49,10 +76,10 @@
           <td  class="orderText"><%= @invited %></td>
           <td  class="orderText"><%= @joined %></td>
           <td>
-          <%= link_to('view',{:action => 'toitem',:id => order.id}) %>
+          <%=  link_to('view', {:action => 'toitem',:id => order.id } ) %>
           <% if order.user_id == current_user.id %>
-          <%= link_to('finish',{:action => 'update',:id => order.id}, method: :post) %>
-          <%= link_to('cancel',{:action => 'destroy',:id => order.id}) %>
+          <%= link_to('finish',{:action => 'update',:id => order.id }, method: :post  )  %>
+          <%= link_to('cancel',{:action => 'destroy',:id => order.id} )  %>
           <% end %>
           </td>
       </tr>
