@@ -1,24 +1,33 @@
-welcome new friend 
 
-<table>
-<tr>
-<td>My Group Members</td>
-</tr>
-<% @groupmembers.each do |member| %>
-<tr>
-<td><%=member.user_email %><td>
-<td><%= link_to "delete", "/groups/#{params[:id]}/deletemember/?default_id=#{member.id}"%> </td>
-</tr>
+<div class="container">
 
-<% end %>
-</table>    
+  
+<div class="row">
+<%= form_with scope: :group, :url => { :action => "addmember", :group_id =>params[:id]},:clss=>"col-md-6",local: true do |form| %>
+    <label >Member Email:</label>
+    <div class="form-group">
+    <%= form.text_field :email ,:class=>"form-control"%>
+    </div>
 
-<%= form_with scope: :group, :url => { :action => "addmember", :group_id =>params[:id]},local: true do |form| %>
-    <label>member email:</label>
-    <%= form.text_field :email %><br>
-    <%= form.submit "add" %>
+    <%= form.submit "add",:class=>"btn btn-primary" %>
   <% end %>
-  <br>
-  <%= link_to "list_groups", "/groups"%>
+
+  </div>
+
+<% @groupmembers.each do |member| %>
+<div class="row" style="margin:10px;">
+<div class="col-md-6">
+<%=member.user_email  %>
+</div>
+<%= link_to "delete", "/groups/#{params[:id]}/deletemember/?default_id=#{member.id}", :class=>"btn  btn-danger col-md-4"%> 
+</div>
+<% end %>
+  
+
+  <div class="row">
+  <%= link_to "Show All Groups", "/groups",:class=>"btn btn-lg btn-primary"%>
+
+  </div>
+  </div>
 
   

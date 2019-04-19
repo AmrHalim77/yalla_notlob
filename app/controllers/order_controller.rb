@@ -5,6 +5,7 @@ class OrderController < ApplicationController
   
   def index
     @orders = Order.where(:user_id => current_user.id)
+    p @orders
     @user_orders = Orderuser.where("user_id = #{current_user.id} AND status = 1")
     @joined_orders = []
     @user_orders.each do |order|
@@ -123,10 +124,6 @@ class OrderController < ApplicationController
     @group_id = params[:group_id]
     @order_id = params[:order_id]
     @groupmembers = Groupmember.where("group_id = #{@group_id}")
-    p "****************************************"
-    p @groupmembers.length
-    p @group_id
-    p "****************************************"
     @order= Order.find(params[:order_id])
     @groupmembers.each do |member|
       @order_user = Orderuser.new({:order_id => @order_id, :user_id => member.user_id, :status => 0})
