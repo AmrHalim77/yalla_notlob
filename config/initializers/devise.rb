@@ -13,7 +13,8 @@ Devise.setup do |config|
   # ==> Controller configuration
   # Configure the parent class to the devise controllers.
   # config.parent_controller = 'DeviseController'
-
+#david test
+  #config.omniauth :facebook, 347065969252838, ENV["FB_SECRET"], scope: 'email', info_fields: 'email, name ', image_size: 'large'
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class
@@ -303,6 +304,6 @@ Devise.setup do |config|
   config.omniauth :google_oauth2, client_id, client_secret, {
     scope: "contacts.readonly,userinfo.email"
   }
-  config.omniauth :facebook, "289535368606163", "627a3f8c50c94c80e895c3402aea4d90" ,token_params: { parse: :json }
-
+  config.omniauth :facebook, "347065969252838", "cc1f31dd3ef4aa84a2f1094c3a639f8c" ,token_params: { parse: :json }
+  #config.omniauth :facebook, "347065969252838", "App Secret", callback_url: "http://localhost:3000/auth/auth/facebook"
 end
