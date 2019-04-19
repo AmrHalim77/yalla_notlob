@@ -24,6 +24,13 @@ class UserController < ApplicationController
     redirect_to "/users/#{current_user.id}/notifications"  
   end
 
+  def notifications_center
+
+    @notifications = current_user.notifications
+    @users = User.all
+    redirect_to "/users/#{current_user.id}/notifications"  
+  end
+
   def login
   end
 
