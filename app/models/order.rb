@@ -12,9 +12,9 @@ class Order < ApplicationRecord
     # The first argument is the plural symbol name of your target model.
     acts_as_notifiable :users,
     targets: ->(order, key ) {
-        if key == "invited you to order"
+        if key == "invited you to order from"
             [User.find(order.invited_users)]
-        elsif key == "finished an order"  
+        elsif key == "finished an order from"  
             p "order finished send notification to invited users"
             @ordusers=Orderuser.where(order_id: order.id , status: 1)
             @invited_users ||= []
@@ -23,7 +23,7 @@ class Order < ApplicationRecord
                end
             p @invited_users
             @invited_users
-        elsif key == "cancelled an order"  
+        elsif key == "cancelled an order from"  
             [User.find(order.invited_users)]
         end
     },notifiable_path: :order_notifiable_path

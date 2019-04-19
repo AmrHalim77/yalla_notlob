@@ -21,18 +21,19 @@
 <% @friendsids.each do |friend| %>
   
   <tr>
-  <% friend %> 
+  <% friend %>  
+  <% @order=Order.where(:user_id => friend).last%>  
+  <% if @order.present? %>
   <td> <%= @friendmail=User.find(friend).email%> </td>
-  <% @order=Order.where(:user_id => friend).last%>
-   <td> created </td>
-   <td> <%= @order.order_type %> </td>
-   <td> from</td>
-   <td> <%= @order.restaurant %> </td>  
+  <td> created </td>
+  <td> <%= @order.order_type %> </td>
+  <td> from</td>
+  <td> <%= @order.restaurant %> </td>  
   </tr>
   <% end %>
-</table >
-<h3>Latest Orders</h3>
- <table class="table table-striped">
+
+ <h1>Latest Orders</h1>
+ <% if @order.present?%>
   <% @orders.last(2).each do |order| %>
     <tr>
     
