@@ -1,7 +1,7 @@
 class Order < ApplicationRecord
     belongs_to :user
-    has_many :items
-    has_many :orderusers 
+    has_many :items, dependent: :destroy
+    has_many :orderusers, dependent: :destroy
     ORDER_TYPES = ["Volunteer", "Participant"]
     has_one_attached :menu , :dependent => :delete_all  
 
@@ -35,7 +35,6 @@ class Order < ApplicationRecord
     # },notifiable_path: :article_notifiable_path
 
     def order_notifiable_path
-        
         order_display_notification_path(id)
         # redirect_to "/order/index" 
         # order_index_path()

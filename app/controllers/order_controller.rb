@@ -4,7 +4,12 @@ class OrderController < ApplicationController
   end
   
   def index
-  @orders = Order.where(:user_id => current_user.id)
+    @orders = Order.where(:user_id => current_user.id)
+    @user_orders = Orderuser.where("user_id = #{current_user.id} AND status = 1")
+    @joined_orders = []
+    @user_orders.each do |order|
+      @joined_orders << Order.find(order.order_id)
+    end
   end
 
   def toitem

@@ -22,11 +22,6 @@ class GroupsController < ApplicationController
     # redirect_to(:action => 'show' , {:group_id => params[:group_id]})
   end
   def show
-    p "******************************************************"
-    p params
-    p "Erooooooooooooooooooor AMrrrrrrrrrrrrrrrrrrrrrrrrr"
-    p "******************************************************"
-   
    @groupmembers = Groupmember.where(:group_id => params[:id])
 
   end
@@ -39,6 +34,7 @@ class GroupsController < ApplicationController
 
   def new
    @group = Group.new
+   
   end
 
   def edit
@@ -46,6 +42,7 @@ class GroupsController < ApplicationController
 
   def destroy
     @group.destroy
+    redirect_to :action => 'index'
   end
     def update
     @group = Group.find(params[:id_friend])

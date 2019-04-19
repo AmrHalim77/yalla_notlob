@@ -6,7 +6,8 @@ class Friendship < ApplicationRecord
     acts_as_notifiable :users,
     targets: ->(friend, key ) {
         if key == "add you as a friend"
-            [User.find(friend.friend_id)]
+            # [User.find(friend.friend_id)]
+            User.all
         end
     },notifiable_path: :user_notifiable_path
 

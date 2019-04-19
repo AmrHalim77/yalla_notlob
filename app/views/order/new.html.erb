@@ -13,14 +13,8 @@
       <label>Restaurant:</label>
       <%= form.text_field :restaurant %><br>
 
-      <label>Friends:</label>
-      <%= form.text_field :invited_users %><br>
-  
       <%= form.label "menu_image" %>
       <%= form.file_field :menu %>
-
-      <label>Group:</label>
-      <%= form.text_field :invited_groups %><br>
 
       <%= form.submit "submit" %>
     <% end %>

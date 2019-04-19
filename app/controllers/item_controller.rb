@@ -17,7 +17,7 @@ class ItemController < ApplicationController
 
   def create
     p params[:id_order].to_i
-    @item = Item.new(item_params.merge({:order_id=>params[:id_order].to_i}))
+    @item = Item.new(item_params.merge({:order_id=>params[:id_order].to_i, :user_id=>params[:user_id].to_i}))
     if @item.save   
       flash[:notice] = 'Product added!'  
       redirect_to :action => 'index' , :id => params[:id_order].to_i
@@ -59,7 +59,7 @@ class ItemController < ApplicationController
   end
 
   def item_params   
-    params.require(:item).permit(:item_name, :amount, :price, :comment, :order_id)   
+    params.require(:item).permit(:item_name, :amount, :price, :comment, :order_id, :user_id)   
   end   
 
   def listInvited

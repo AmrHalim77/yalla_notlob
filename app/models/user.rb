@@ -9,10 +9,10 @@ class User < ApplicationRecord
   acts_as_target
   # serialize :groups
   # serialize :orders
-  has_many :orderusers
-  has_many :groupmembers
-  has_many :friendships
-  has_many :friends, :through => :friendships
+  has_many :orderusers, dependent: :destroy
+  has_many :groupmembers, dependent: :destroy
+  has_many :friendships, dependent: :destroy
+  has_many :friends, :through => :friendships, dependent: :destroy
   has_many :inverse_friendships, :class_name => "Friendship", :foreign_key => "friend_id"
   has_many :inverse_friends, :through => :inverse_friendships, :source => :user
   def self.search(search)

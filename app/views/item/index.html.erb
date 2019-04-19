@@ -19,30 +19,29 @@
 
     <% @items.each do |item| %>
       <tr>
-          <td><%= item.user_id %></td>
+          <td><% @user= User.find(item.user_id) %></td>
+          <td><%= @user.email %></td>
           <td><%= item.item_name %></td>
           <td><%= item.amount %></td>
           <td><%= item.price %></td>
           <td><%= item.comment %></td>
           <td>          
-           
+           <% if item.user_id == current_user.id %>
             <%= link_to 'Cancel',
             {controller: 'item',
              action: 'destroy',
              id_order: params[:id],
              id: item.id},
             class: 'button' %>  
-
+           <% end %>
           </td>
         </tr>
       <% end %> 
          
       
-    
-
 </table>
-
-<%= form_with scope: :item, :url => { :action => "create", :id_order =>params[:id]},local: true do |form| %>
+<% if @order.user_id == current_user.id %>
+  <%= form_with scope: :item, :url => { :action => "create", :id_order =>params[:id], :user_id =>current_user.id},local: true do |form| %>
     <label>item name:</label>
     <%= form.text_field :item_name %><br>
 
@@ -57,9 +56,12 @@
     <%= form.submit "add" %>
   <% end %>
 
-
+<% end %>
   <tr>
     <%= link_to "#{@invited} friends Invited", "/item/listInvited?order_id=#{@order.id}" %>
     <br>
     <%= link_to "#{@joined} friends Joined", "/item/listJoined?order_id=#{@order.id}" %>
+    <br>
+    <%= link_to "list_orders", "/order/index" %>
   </tr>
+  
