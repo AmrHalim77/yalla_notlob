@@ -15,9 +15,10 @@ welcome new friend
 
 <%= form_with scope: :group, :url => { :action => "addmember", :group_id =>params[:id]},local: true do |form| %>
     <label>member email:</label>
-    <%= params[:id] %>
     <%= form.text_field :email %><br>
     <%= form.submit "add" %>
   <% end %>
+  <br>
+  <%= link_to "list_groups", "/groups"%>
 
   

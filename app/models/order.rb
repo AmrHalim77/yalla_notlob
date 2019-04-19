@@ -1,9 +1,9 @@
 class Order < ApplicationRecord
     belongs_to :user
-    has_many :items
-    has_many :orderusers
+    has_many :items, dependent: :destroy
+    has_many :orderusers, dependent: :destroy
     ORDER_TYPES = ["Volunteer", "Participant"]
-    has_one_attached :menu
+    has_one_attached :menu , :dependent => :delete_all  
 
     # serialize :joined_
 
@@ -14,8 +14,17 @@ class Order < ApplicationRecord
     targets: ->(order, key ) {
         if key == "invited you to order"
             [User.find(order.invited_users)]
-        else
-            p "hi"
+        elsif key == "finished an order"  
+            p "order finished send notification to invited users"
+            @ordusers=Orderuser.where(order_id: order.id , status: 1)
+            @invited_users ||= []
+            @ordusers.each do |u|
+                @invited_users << User.find(u.user_id)   
+               end
+            p @invited_users
+            @invited_users
+        elsif key == "cancelled an order"  
+            [User.find(order.invited_users)]
         end
     },notifiable_path: :order_notifiable_path
 
@@ -26,7 +35,6 @@ class Order < ApplicationRecord
     # },notifiable_path: :article_notifiable_path
 
     def order_notifiable_path
-        
         order_display_notification_path(id)
         # redirect_to "/order/index" 
         # order_index_path()
