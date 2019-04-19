@@ -31,6 +31,7 @@ Rails.application.routes.draw do
   get 'user/index'
   get 'user/friend'
   post 'user/addfriend'
+  get 'user/notifications_list'
   root to: 'user#index'
   get 'item/index'
   get 'item/show'
