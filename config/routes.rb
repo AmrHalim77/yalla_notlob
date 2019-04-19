@@ -33,6 +33,7 @@ Rails.application.routes.draw do
   get 'user/friend'
   post 'user/addfriend'
   get 'user/notifications_list'
+  get 'user/notifications_center'
   root to: 'user#index'
   get 'item/index'
   get 'item/show'

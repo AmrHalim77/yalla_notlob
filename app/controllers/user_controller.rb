@@ -7,9 +7,7 @@ class UserController < ApplicationController
     @friendsids.push(idd.friend_id)
     end
     @orders = Order.where(:user_id => current_user.id)
-    p "*********************"
-    p @orders
-    p "*********************"
+   
   end
 
   def friend
@@ -25,6 +23,14 @@ class UserController < ApplicationController
 
   
   def notifications_list
+    p "heloo"
+    @notifications = current_user.notifications.unopened_only
+    @users = User.all
+    redirect_to "/users/#{current_user.id}/notifications"  
+  end
+
+  def notifications_center
+
     @notifications = current_user.notifications
     @users = User.all
     redirect_to "/users/#{current_user.id}/notifications"  
