@@ -23,7 +23,7 @@ class UserController < ApplicationController
 
   def notifications_list
 
-    @notifications = current_user.notifications.unopened_only
+    @notifications = current_user.notifications
     @users = User.all
     redirect_to "/users/#{current_user.id}/notifications"  
   end

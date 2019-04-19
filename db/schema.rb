@@ -10,28 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_16_192426) do
-
-  create_table "active_storage_attachments", force: :cascade do |t|
-    t.string "name", null: false
-    t.string "record_type", null: false
-    t.integer "record_id", null: false
-    t.integer "blob_id", null: false
-    t.datetime "created_at", null: false
-    t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
-    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
-  end
-
-  create_table "active_storage_blobs", force: :cascade do |t|
-    t.string "key", null: false
-    t.string "filename", null: false
-    t.string "content_type"
-    t.text "metadata"
-    t.bigint "byte_size", null: false
-    t.string "checksum", null: false
-    t.datetime "created_at", null: false
-    t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
-  end
+ActiveRecord::Schema.define(version: 2019_04_19_121625) do
 
   create_table "friends", force: :cascade do |t|
     t.integer "user_id"
@@ -75,10 +54,10 @@ ActiveRecord::Schema.define(version: 2019_04_16_192426) do
     t.text "comment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "user_id"
     t.integer "order_id"
-    t.index ["order_id"], name: "index_items_on_order_id"
-    t.index ["user_id"], name: "index_items_on_user_id"
+    t.integer "user_id"
+    t.index ["order_id"], name: "index_items_on_order_id", unique: true
+    t.index ["user_id"], name: "index_items_on_user_id", unique: true
   end
 
   create_table "notifications", force: :cascade do |t|
@@ -107,13 +86,14 @@ ActiveRecord::Schema.define(version: 2019_04_16_192426) do
     t.string "order_status"
     t.string "order_type"
     t.string "restaurant"
+    t.string "menu_image"
     t.string "joined_users"
     t.string "invited_users"
     t.string "order_items"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
-    t.index ["user_id"], name: "index_orders_on_user_id"
+    t.index ["user_id"], name: "index_orders_on_user_id", unique: true
   end
 
   create_table "orderusers", force: :cascade do |t|
@@ -154,6 +134,12 @@ ActiveRecord::Schema.define(version: 2019_04_16_192426) do
     t.string "friends"
     t.string "groups"
     t.string "orders"
+    t.string "provider"
+    t.string "uid"
+    t.string "token"
+    t.integer "expires_at"
+    t.boolean "expires"
+    t.string "refresh_token"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
