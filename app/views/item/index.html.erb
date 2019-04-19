@@ -40,7 +40,6 @@
          
       
 </table>
-<% if @order.user_id == current_user.id %>
   <%= form_with scope: :item, :url => { :action => "create", :id_order =>params[:id], :user_id =>current_user.id},local: true do |form| %>
     <label>item name:</label>
     <%= form.text_field :item_name %><br>
@@ -54,7 +53,7 @@
     <label>comment:</label>
     <%= form.text_area :comment, size: "20x5" %><br><br>
     <%= form.submit "add" %>
-  <% end %>
+  
 
 <% end %>
   <tr>
