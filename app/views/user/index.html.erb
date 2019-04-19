@@ -8,18 +8,28 @@
   </li>
 <% end %>
 
+<h1>Friends Activity</h1>
 
-<h1>User#index</h1>
-
-
-<% @users.each do |item| %>
+<% @friendsids.each do |friend| %>
+  
   <tr>
-      <td><%= item.email %></td>
-      
+  <td> <% friend %> </td>
+  <td> <%= @friendmail=User.find(friend).email%> </td>
+  <% @order=Order.where(:user_id => friend).last%>
+  created
+  <%= @order.order_type %>
+  from
+  <%= @order.restaurant %>
+<br>  
   </tr>
-<% end %>
+  <% end %>
 
-<p>Find me in app/views/user/index.html.erb</p>
-
-
-<%= link_to('notifications_center',{:action => 'notifications_list'}) %>
+ <h1>Latest Orders</h1>
+  <% @orders.last(2).each do |order| %>
+    <tr>
+    <%= order.order_type %>
+    on
+    <%= order.created_at %>
+  <br>  
+    </tr>
+    <% end %>
