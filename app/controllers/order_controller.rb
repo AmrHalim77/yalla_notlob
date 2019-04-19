@@ -5,6 +5,7 @@ class OrderController < ApplicationController
   
   def index
     @orders = Order.where(:user_id => current_user.id)
+    p @orders
     @user_orders = Orderuser.where("user_id = #{current_user.id} AND status = 1")
     @joined_orders = []
     @user_orders.each do |order|

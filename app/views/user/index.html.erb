@@ -8,8 +8,6 @@
   </li>
 <% end %>
 
-
-<h1>User#index</h1>
 <h1>Friends Activity</h1>
 
 <% @friendsids.each do |friend| %>
@@ -26,9 +24,12 @@
   </tr>
   <% end %>
 
-  <% @orders.each do |order| %>
+ <h1>Latest Orders</h1>
+  <% @orders.last(2).each do |order| %>
     <tr>
-    <%= @order.restaurant %>
+    <%= order.order_type %>
+    on
+    <%= order.created_at %>
   <br>  
     </tr>
     <% end %>

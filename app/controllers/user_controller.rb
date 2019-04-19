@@ -7,6 +7,9 @@ class UserController < ApplicationController
     @friendsids.push(idd.friend_id)
     end
     @orders = Order.where(:user_id => current_user.id)
+    p "*********************"
+    p @orders
+    p "*********************"
   end
 
   def friend
@@ -20,9 +23,8 @@ class UserController < ApplicationController
 
   end
 
-
+  
   def notifications_list
-
     @notifications = current_user.notifications
     @users = User.all
     redirect_to "/users/#{current_user.id}/notifications"  
@@ -30,8 +32,5 @@ class UserController < ApplicationController
 
   def login
   end
-
-
-
 
 end
