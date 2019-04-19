@@ -1,17 +1,17 @@
 <h1>Groups#index</h1>
 <p>Find me in app/views/groups/index.html.erb</p>
 
-<table>
+<table  class="table table-striped">
 <tr>
 <td>My Groups</td>
 </tr>
 <% @groups.each do |group| %>
 <tr>
 <td><%=group.name %><td>
-<td><%= link_to 'Show', group %> </td>
-<td><%= link_to 'Delete', group, method: :delete, data: { confirm: "Are you sure?" } %> </td>
+<td><%= link_to 'Show', group , class:"btn btn-primary" %> </td>
+<td><%= link_to 'Delete', group,  method: :delete, data: { confirm: "Are you sure?" } ,class:"btn btn-primary" %> </td>
 </tr>
 
 <% end %>
-<%= link_to 'New Group', new_group_path %>
+<%= link_to 'New Group', new_group_path , class:"btn btn-success"%>
 </table>    
