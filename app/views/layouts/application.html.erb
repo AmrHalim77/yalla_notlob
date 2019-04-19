@@ -55,59 +55,39 @@
               <%= link_to "Orders", order_index_path %>
           </div>   
           <div class="right">
-          <div class="btn-group">
-          <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Action
-          </button>
-          <div class="dropdown-menu">
-            
-            <% if @notifications %>
-                      <% @notifications.each do |note| %>
-                        
-                          <a class="dropdown-item" href="#"> 
-                            <strong><%= note.notifier.present? ? note.notifier.printable_notifier_name : note.parameters[:owner] %></strong>
-                            <%= note.key%>
-                            <%= "from " %><strong><%=  note.parameters[:restaurant] %></strong>
-                          </a>
-                    
-                      <%end%>
-                  <% else %>
-                  <li readonly="readonly"  class="dropdown-item" > all read!</li> 
-                  <%end%>    
-
-
-            <div class="dropdown-divider"></div>
-            <%= link_to 'notifications_center' ,  user_notifications_center_path %> 
-          </div>
-        </div>
+         
           <div class="size">
-                  <input type="text" name="test" value="notification" class="field" readonly="readonly" />
+                  <input type="button" name="test" value="notification" class="field" readonly="readonly" />
                   <ul class="list">
                   <% if @notifications %>
                       <% @notifications.each do |note| %>
+
+                        <strong><% v = note.notifier.present? ? note.notifier.printable_notifier_name : note.parameters[:owner] %></strong>
+                        <% v2 =  note.parameters[:restaurant] %>
                         <li>
-                          <a> 
-                            <strong><%= note.notifier.present? ? note.notifier.printable_notifier_name : note.parameters[:owner] %></strong>
-                            <%= note.key%>
-                            <%= "from " %><strong><%=  note.parameters[:restaurant] %></strong>
-                          </a>
-                        </li> 
+                        <%= link_to "#{v} #{note.key} from #{v2}", order_display_notification_path(note.notifiable_id) %>
+                        </li>
+ 
                       <%end%>
                   <% else %>
-                  <li readonly="readonly" > all read!</li> 
+                  <li readonly="readonly" class = "lif" > all read!</li> 
                   <%end%>    
 
+                  <div class="notcent">
                   <%= link_to 'notifications_center' ,  user_notifications_center_path %> 
+                  </div>
                   
                   </ul>
                 </div>  
 
-            <a href="http://localhost:3000">user name</a> 
+                <div class="userdet">
+            <a href="http://localhost:3000" >user name</a> 
             <% if user_signed_in? %>
               <%= link_to('Logout', destroy_user_session_path, method: :delete) %>        
             <% else %>
               <%= link_to('Login', new_user_session_path)  %>  
             <% end %>
+            </div>
   
       </div>
       

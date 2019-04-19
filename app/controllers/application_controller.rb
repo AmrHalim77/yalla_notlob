@@ -25,5 +25,13 @@ class ApplicationController < ActionController::Base
       )
       render json: response
     end
+
+    def notifications_list
+      @notifications = current_user.notifications.unopened_only
+      @users = User.all
+    end
+
+
+
   end
 

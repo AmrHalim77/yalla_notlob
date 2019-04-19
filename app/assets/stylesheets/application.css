@@ -29,29 +29,17 @@
      border:solid 1px #fff;
      -moz-box-shadow:0 0 5px #999; -webkit-box-shadow:0 0 5px #999; box-shadow:0 0 5px #999
  }
+
  .size>ul.list { 
      display:none;
-     position:absolute; left:30px; top:6em; z-index:999;
-     width:300px;
-     margin:0; padding:10px; list-style:none;
+     position:absolute; left: 65em; z-index:999;
+     width:350px;
+     margin:0; padding:0px; list-style:none;
      background:#fff; color:#333;
      -moz-border-radius:5px; -webkit-border-radius:5px; border-radius:5px;
      -moz-box-shadow:0 0 5px #999; -webkit-box-shadow:0 0 5px #999; box-shadow:0 0 5px #999
  }
- .size>ul.list li {
-     padding:10px;
-     border-bottom: solid 1px #ccc;
- }
- .size>ul.list li:hover {
-     background:#2196F3; color:#fff;
- }
- .size>ul.list li:last-child { border:none }
-
- .btn-group{
-     float: left;
-     display: inline-block;
- }
-
+ 
  /* Add a black background color to the top navigation bar */
 .topnav {
     overflow: hidden;
@@ -59,7 +47,7 @@
   }
   
   .up{
-      height: 50%;
+      height: 30%;
   }
 
   /* Style the links inside the navigation bar */
@@ -72,7 +60,19 @@
     text-decoration: none;
     font-size: 1em;
   }
+
+  .topnav .right .userdet{
+      float: right;
+  }
   
+  .topnav .right .size{
+    float: left;
+    text-align: center;
+    padding: 0.5em 0.5em;
+    text-decoration: none;
+    font-size: 1em;
+}
+
   /* Change the color of links on hover */
   .topnav a:hover {
     background-color: #ddd;

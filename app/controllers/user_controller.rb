@@ -3,6 +3,7 @@ class UserController < ApplicationController
   def index
     @users = User.all
     @notifications = current_user.notifications
+    p @notifications
   end
 
   def friend
@@ -18,8 +19,8 @@ class UserController < ApplicationController
 
 
   def notifications_list
-
-    @notifications = current_user.notifications
+    p "heloo"
+    @notifications = current_user.notifications.unopened_only
     @users = User.all
     redirect_to "/users/#{current_user.id}/notifications"  
   end
