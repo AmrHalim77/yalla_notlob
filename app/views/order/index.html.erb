@@ -1,23 +1,8 @@
-<h1>Order#index</h1>
-<p>Find me in app/views/order/index.html.erb</p>
-<h2>Orders you created:</h2>
+
 <a href="/order/new" class="btn btn-success">add order</a>
-
+<h2>Orders you created:</h2>
 <table class="table table-striped">
-    <tr>
-      <th>Order<th>
-      <th>Restaurant</th>
-      <th>Invited</th>
-      <th>Price</th>
-      <th>Status</th>
-      <th>Actions</th>
-      <th>Invited Friends</th>
-      <th>Joined Friends</th>
-    </tr>   
-
-<h2>Orders</h2>
-<a href="/order/new" class="text-right">Start new order</a>
-      
+   
 
 <table class="table table-striped">
     <thead>
@@ -43,10 +28,10 @@
           <td><%= @invited %></td>
           <td><%= @joined %></td>
           <td>
-          <%= link_to('view',{:action => 'toitem',:id => order.id}) %>
+          <%= link_to('view',{:action => 'toitem',:id => order.id},class:"btn btn-primary") %>
           <% if order.user_id == current_user.id %>
-          <%= link_to('finish',{:action => 'update',:id => order.id}, method: :post) %>
-          <%= link_to('cancel',{:action => 'destroy',:id => order.id}) %>
+          <%= link_to('finish',{:action => 'update',:id => order.id},class:"btn btn-primary", method: :post) %>
+          <%= link_to('cancel',{:action => 'destroy',:id => order.id},class:"btn btn-primary") %>
           <% end %>
           </td>
       </tr>
