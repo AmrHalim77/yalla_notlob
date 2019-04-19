@@ -14,17 +14,22 @@
   
   <tr>
   <td> <% friend %> </td>
-  <td> <%= @friendmail=User.find(friend).email%> </td>
+  
   <% @order=Order.where(:user_id => friend).last%>
+  
+  <% if @order.present? %>
+  <td> <%= @friendmail=User.find(friend).email%> </td>
   created
-  <%= @order.order_type %>
+  <%=  @order.order_type %>
   from
   <%= @order.restaurant %>
+  <% end %>
 <br>  
   </tr>
   <% end %>
 
  <h1>Latest Orders</h1>
+ <% if @order.present?%>
   <% @orders.last(2).each do |order| %>
     <tr>
     <%= order.order_type %>
@@ -33,3 +38,4 @@
   <br>  
     </tr>
     <% end %>
+<% end %>
