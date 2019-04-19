@@ -26,6 +26,7 @@
           <td><%= item.comment %></td>
           <td>          
            <% if item.user_id == current_user.id %>
+           <% if @order.order_status == "waiting" %>
             <%= link_to 'Cancel',
             {controller: 'item',
              action: 'destroy',
@@ -35,11 +36,12 @@
            <% end %>
           </td>
         </tr>
+        <% end %> 
       <% end %> 
          
       
 </table>
-<% if @order.user_id == current_user.id %>
+<% if @order.order_status == "waiting" %>
   <%= form_with scope: :item, :url => { :action => "create", :id_order =>params[:id], :user_id =>current_user.id},local: true do |form| %>
     <label class="col-sm-2 control-label">item name:</label>
     <%= form.text_field :item_name %><br>
