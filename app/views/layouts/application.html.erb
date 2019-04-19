@@ -69,6 +69,7 @@
           <div class="size">
                   <input type="button" name="test" value="notification" class="field" readonly="readonly" />
                   <ul class="list">
+                  <% @notifications = current_user.notifications.unopened_only %>
                   <% if @notifications %>
                       <% @notifications.each do |note| %>
 
