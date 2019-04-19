@@ -1,6 +1,8 @@
 <% if user_signed_in? %>
   <li>
-  <%= link_to('Logout', destroy_user_session_path, method: :delete) %>        
+  <div class="btn-group" >
+  <%= link_to('Logout' , destroy_user_session_path, method: :delete) %>        
+  </div>
   </li>
 <% else %>
   <li>
@@ -10,26 +12,34 @@
 
 <h1>Friends Activity</h1>
 
+
+<table class="table table-striped">
+    <tr>
+      <th>E-mail<th>
+    </tr>  
+
 <% @friendsids.each do |friend| %>
   
   <tr>
-  <td> <% friend %> </td>
+  <% friend %> 
   <td> <%= @friendmail=User.find(friend).email%> </td>
   <% @order=Order.where(:user_id => friend).last%>
-  created
-  <%= @order.order_type %>
-  from
-  <%= @order.restaurant %>
-<br>  
+   <td> created </td>
+   <td> <%= @order.order_type %> </td>
+   <td> from</td>
+   <td> <%= @order.restaurant %> </td>  
   </tr>
   <% end %>
-
- <h1>Latest Orders</h1>
+</table >
+<h3>Latest Orders</h3>
+ <table class="table table-striped">
   <% @orders.last(2).each do |order| %>
     <tr>
-    <%= order.order_type %>
-    on
-    <%= order.created_at %>
-  <br>  
+    
+    <td><%= order.order_type %><td/>
+    <td>on</td>
+    <td><%= order.created_at %></td>
+
     </tr>
     <% end %>
+</table>
