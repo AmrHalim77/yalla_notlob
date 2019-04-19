@@ -106,10 +106,6 @@ class OrderController < ApplicationController
     @group_id = params[:group_id]
     @order_id = params[:order_id]
     @groupmembers = Groupmember.where("group_id = #{@group_id}")
-    p "****************************************"
-    p @groupmembers.length
-    p @group_id
-    p "****************************************"
     @order= Order.find(params[:order_id])
     @groupmembers.each do |member|
       @order_user = Orderuser.new({:order_id => @order_id, :user_id => member.user_id, :status => 0})
