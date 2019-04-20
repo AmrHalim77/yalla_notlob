@@ -3,3 +3,4 @@
     <p><%= @myUser.email %></p>
     <%= link_to "Remove", "/item/deleteInvited?order_id=#{params[:order_id]}&&user_id=#{user.user_id}",class:"btn btn-primary" %>
 <% end %>
+<%= link_to "Back to order", "/item/index?id=#{params[:order_id]}",class:"btn btn-primary" %>
